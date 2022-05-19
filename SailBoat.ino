@@ -1,5 +1,5 @@
 #include <WindDirection.h>
-
+#include <WindSpeed.h>
 
 int last_dir=-50, last_speed = -50;
 int dir, spd;

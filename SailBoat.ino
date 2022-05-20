@@ -3,8 +3,9 @@
 #include <CMPS12.h>
 
 
-int last_dir=-50, last_speed = -50, last_angle = -50;
-int dir, spd, angle;
+int last_dir=-50, last_angle = -50;
+int dir, angle;
+float last_speed = -50, spd;
 
 
 WindDirection wd; // Sensor for wind direction

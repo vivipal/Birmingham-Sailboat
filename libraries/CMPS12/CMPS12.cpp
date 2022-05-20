@@ -14,6 +14,7 @@ CMPS12::~CMPS12(){
 }
 
 void CMPS12::update(){
+  ss.listen();
   ss.write(CMPS_GET_ANGLE16);  // Request and read 16 bit angle
   while(ss.available() < 2);
   unsigned char high_byte = ss.read();
@@ -37,5 +38,4 @@ void CMPS12::update(){
 
 float CMPS12::getAngle(){
   return m_angle16/10 + (float)(m_angle16%10)/10;
-  // return m_angle16;
 }

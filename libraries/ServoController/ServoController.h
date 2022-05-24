@@ -11,9 +11,10 @@ class Servo_Motor {
     void init(Adafruit_PWMServoDriver* motor_ptr);
 
     void setPWM(unsigned int pulse);
-
+    void set(float percent);
     float minPWM();
     float maxPWM();
+
 
 
   private:
@@ -27,6 +28,8 @@ class Servo_Motor {
     unsigned int m_pwmMax;
     float m_anglemin;
     float m_anglemax;
+
+    unsigned int m_last_set=0;
 
 
 };

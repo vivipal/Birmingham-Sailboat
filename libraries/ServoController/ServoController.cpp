@@ -23,6 +23,19 @@ void Servo_Motor::setPWM(unsigned int pulse){
 float Servo_Motor::minPWM(){
   return m_pwmMin;
 }
+
 float Servo_Motor::maxPWM(){
   return m_pwmMax;
+}
+
+
+void Servo_Motor::set(float percent){
+
+  if ((millis()-m_last_set) > 1000){
+    unsigned int pwm = (int) (m_pwmMax-m_pwmMin)*percent + m_pwmMin;
+    if (pwm > m_pwmMax) {pwm = m_pwmMax;}
+    if (pwm < m_pwmMin) {pwm = m_pwmMin;}
+    setPWM(pwm);
+  }
+
 }

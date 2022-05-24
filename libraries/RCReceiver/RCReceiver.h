@@ -16,6 +16,8 @@ class RC {
     float getFilteredValue(int channel);
     float getValue(int channel);
 
+    int isReceiving();
+
 
   private :
     unsigned long m_start_time[CHANNEL_NB];
@@ -25,6 +27,8 @@ class RC {
 
     float m_offsetmax[CHANNEL_NB];
     float m_offsetmin[CHANNEL_NB];
+
+    unsigned int m_last_interrupt;
 
 
 

@@ -5,8 +5,8 @@
 #include <Arduino.h>
 #include <TinyGPS++.h>
 
-#define GPS_VALID 1
-#define GPS_NOT_VALID 0
+#define VALID 1
+#define NOT_VALID 0
 
 class GPS {
 
@@ -17,9 +17,22 @@ class GPS {
 
     void update();
 
+    int locationStatus();
+    int speedStatus();
+    int timeStatus();
+    int dateStatus();
+    int elevationStatus();
+
     double getLat();
     double getLon();
-    int status();
+    float getSpeed();
+    float getElev();
+    float geth();
+    float getm();
+    float gets();
+    float getM();
+    float getD();
+    float getY();
 
   private:
     SoftwareSerial ss;

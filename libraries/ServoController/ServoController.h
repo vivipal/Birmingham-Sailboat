@@ -29,7 +29,6 @@ class Servo_Motor {
     float m_anglemin;
     float m_anglemax;
 
-    unsigned int m_last_set=0;
 
 
 };

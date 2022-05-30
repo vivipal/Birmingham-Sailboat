@@ -25,13 +25,10 @@ class RC {
     unsigned long m_filtered_value[CHANNEL_NB];
     float m_value[CHANNEL_NB];
 
-    float m_offsetmax[CHANNEL_NB];
-    float m_offsetmin[CHANNEL_NB];
+    unsigned long m_offsetmax[CHANNEL_NB];
+    unsigned long m_offsetmin[CHANNEL_NB];
 
     unsigned long m_last_interrupt;
-
-
-
 
 };
 

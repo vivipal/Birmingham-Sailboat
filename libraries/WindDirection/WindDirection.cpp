@@ -27,3 +27,11 @@ float WindDirection::getRawValue(){
 int WindDirection::getDirection(){
   return m_direction;
 }
+
+double WindDirection::getCos(){
+  return cos(m_direction * M_PI/180);
+}
+
+double WindDirection::getSin(){
+  return sin(m_direction * M_PI/180);
+}

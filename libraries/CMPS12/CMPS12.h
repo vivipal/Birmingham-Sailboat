@@ -17,13 +17,19 @@ class CMPS12 {
     ~CMPS12();
 
     void update();
-    float getAngle();
+    double getAngle();
+    double getCos();
+    double getSin();
+
+    float getPitch();
+    float getRoll();
 
 
 
   private :
     SoftwareSerial ss;
-    
+
+    double m_angle;
     char m_roll;
     char m_pitch;
     unsigned char m_angle8;

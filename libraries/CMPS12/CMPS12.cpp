@@ -22,6 +22,7 @@ void CMPS12::update(){
   m_angle16 = high_byte;                // Calculate 16 bit angle
   m_angle16 <<= 8;
   m_angle16 += low_byte;
+  m_angle = m_angle16/10 + (float)(m_angle16%10)/10;
 
   ss.write(CMPS_GET_ANGLE8);  // Request and read 8 bit angle
   while(ss.available() < 1);
@@ -34,8 +35,24 @@ void CMPS12::update(){
   ss.write(CMPS_GET_ROLL);    // Request and read roll value
   while(ss.available() < 1);
   m_roll = ss.read();
+
 }
 
-float CMPS12::getAngle(){
-  return m_angle16/10 + (float)(m_angle16%10)/10;
+double CMPS12::getAngle(){
+  return m_angle;
+}
+
+double CMPS12::getCos(){
+  return cos(m_angle * M_PI/180);
+}
+
+double CMPS12::getSin(){
+  return sin(m_angle * M_PI/180);
+}
+
+float CMPS12::getPitch(){
+  return (float)m_pitch;
+}
+float CMPS12::getRoll(){
+  return (float)m_roll;
 }

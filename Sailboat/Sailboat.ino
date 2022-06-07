@@ -1,10 +1,4 @@
-#include <WindDirection.h>
-#include <WindSpeed.h>
-#include <CMPS12.h>
-#include <GPS.h>
-#include <ServoController.h>
-#include <RCReceiver.h>
-#include <Logger.h>
+#include "Sailboat.h"
 
 int last_dir=-50, last_angle = -50;
 int dir, angle;
@@ -12,39 +6,33 @@ float last_speed = -50, spd;
 double lati,lon, last_lati=0,last_lon=0;
 float steering, throttle;
 
-WindDirection wd; // Sensor for wind direction
-WindSpeed ws; // Sensor for wind speed
-CMPS12 compass; // Compass sensor
-GPS gps; // gps
+Sailboat boat;
+
+Logger logger;
+
 Servo_Motor rudderServo(0,143,428,-90,90);
 Servo_Motor sailServo(1,151,417,0,2160);
-RC rc;
-Logger logger;
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 // Interrupt function for the anemometer
-void AnemometerRotation() { ws.newRotation(); }
-void intCH1() { rc.interruptCH(2,0); }
-void intCH2() { rc.interruptCH(3,1); }
+void AnemometerRotation() { boat.ws()->newRotation(); }
+void intCH1() { boat.rc()->interruptCH(2,0); }
+void intCH2() { boat.rc()->interruptCH(3,1); }
 
 void setup(){
 
   Serial.begin(9600);
 
-  wd.init();
+  boat.init();
   attachInterrupt(digitalPinToInterrupt(WIND_SPEED_PIN), AnemometerRotation, FALLING);
-  compass.init();
-  gps.init();
+
   rudderServo.init(&pwm);
   sailServo.init(&pwm);
 
 
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
-
-  attachInterrupt(digitalPinToInterrupt(2), intCH1, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(3), intCH2, CHANGE);
+  pinMode(2, INPUT); attachInterrupt(digitalPinToInterrupt(2), intCH1, CHANGE);
+  pinMode(3, INPUT); attachInterrupt(digitalPinToInterrupt(3), intCH2, CHANGE);
 
   logger.init();
   logger.open();
@@ -57,21 +45,21 @@ void setup(){
 
 
 void loop(){
-  if (rc.isReceiving()){
-    throttle = rc.getValue(0);
-    steering = rc.getValue(1);
+  if (boat.rc()->isReceiving()){
+    throttle = boat.rc()->getValue(0);
+    steering = boat.rc()->getValue(1);
 
     rudderServo.set(steering);
     sailServo.set(throttle);
 
     displayDataB();
   } else  {
-    wd.update(); ws.update(); compass.update(); gps.update();
+    boat.updateSensors();
 
-    dir = wd.getDirection();
-    spd = ws.getSpeed();
-    angle = compass.getAngle();
-    lati = gps.getLat(); lon = gps.getLon();
+    dir = boat.wd()->getDirection();
+    spd = boat.ws()->getSpeed();
+    angle = boat.compass()->getAngle();
+    lati = boat.gps()->getLat(); lon = boat.gps()->getLon();
 
     if(abs(dir - last_dir) > 5 || abs(spd - last_speed) > 0.5 || abs(angle - last_angle) > 0.5|| abs(lati - last_lati) > 0.|| abs(lon - last_lon) > 0.5){
       displayDataA();

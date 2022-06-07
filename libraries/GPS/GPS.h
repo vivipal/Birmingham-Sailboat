@@ -2,6 +2,7 @@
 #define __GPS_H__
 
 #include <Sensor.h>
+#include <Config.h>
 
 #include <SoftwareSerial.h>
 #include <Arduino.h>

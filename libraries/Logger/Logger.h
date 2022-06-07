@@ -20,6 +20,7 @@ class Logger {
     void write(String msg);
     void write(int val);
     void write(float val);
+    void write(double val);
 
 
 

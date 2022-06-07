@@ -35,3 +35,7 @@ void Logger::write(int val){
 void Logger::write(float val){
   m_file.print(val);
 }
+
+void Logger::write(double val){
+  m_file.print(val);
+}

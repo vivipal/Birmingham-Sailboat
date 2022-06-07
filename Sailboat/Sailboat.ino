@@ -4,6 +4,7 @@
 #include <GPS.h>
 #include <ServoController.h>
 #include <RCReceiver.h>
+#include <Logger.h>
 
 int last_dir=-50, last_angle = -50;
 int dir, angle;
@@ -18,6 +19,7 @@ GPS gps; // gps
 Servo_Motor rudderServo(0,143,428,-90,90);
 Servo_Motor sailServo(1,151,417,0,2160);
 RC rc;
+Logger logger;
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
@@ -28,7 +30,7 @@ void intCH2() { rc.interruptCH(3,1); }
 
 void setup(){
 
-  Serial.begin(57600);
+  Serial.begin(9600);
 
   wd.init();
   attachInterrupt(digitalPinToInterrupt(WIND_SPEED_PIN), AnemometerRotation, FALLING);
@@ -43,6 +45,10 @@ void setup(){
 
   attachInterrupt(digitalPinToInterrupt(2), intCH1, CHANGE);
   attachInterrupt(digitalPinToInterrupt(3), intCH2, CHANGE);
+
+  logger.init();
+  logger.open();
+  logger.write("LOG :\n\n");
 
   Serial.println("Setup done");
   Serial.println("----------\n");
@@ -69,6 +75,7 @@ void loop(){
 
     if(abs(dir - last_dir) > 5 || abs(spd - last_speed) > 0.5 || abs(angle - last_angle) > 0.5|| abs(lati - last_lati) > 0.|| abs(lon - last_lon) > 0.5){
       displayDataA();
+      logDataA();
     }
   }
 }
@@ -87,9 +94,20 @@ void displayDataA(){
   last_lon=lon; last_lati=lati;
 }
 
+void logDataA(){
+
+  logger.write(dir); logger.write(";");
+  logger.write(spd); logger.write(";");
+  logger.write(angle); logger.write(";");
+  logger.write(lati); logger.write(";");
+  logger.write(lon); logger.write("\n");
+  logger.flush();
+
+}
+
 void displayDataB(){
   Serial.print(steering);
-  Serial.print("\t");
+  Serial.print(";");
   Serial.print(throttle);
   Serial.println("\t");
 }

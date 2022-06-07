@@ -1,10 +1,12 @@
 #ifndef __RCRECEIVER_H__
 #define __RCRECEIVER_H__
 
+#include <Sensor.h>
+
 
 #define CHANNEL_NB 2 // we are considering only 2 channels
 
-class RC {
+class RC: public Sensor{
   public :
 
     RC();

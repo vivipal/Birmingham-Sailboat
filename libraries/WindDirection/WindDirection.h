@@ -1,13 +1,15 @@
 #ifndef __WINDDIRECTION__H__
 #define __WINDDIRECTION__H__
 
+#include <Sensor.h>
+
 
 #define WIND_DIRECTION_PIN A14
 #define WIND_DIRECTION_SENSOR_MIN 0
 #define WIND_DIRECTION_SENSOR_MAX 1023
 
 
-class WindDirection {
+class WindDirection: public Sensor {
 
   public :
     WindDirection();

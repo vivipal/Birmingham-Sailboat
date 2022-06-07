@@ -1,6 +1,7 @@
 #ifndef __CMPS12_H__
 #define __CMPS12_H__
 
+#include <Sensor.h>
 
 #include <SoftwareSerial.h>
 #include <Arduino.h>
@@ -10,7 +11,7 @@
 #define CMPS_GET_PITCH 0x14
 #define CMPS_GET_ROLL 0x15
 
-class CMPS12 {
+class CMPS12: public Sensor {
   public:
     CMPS12();
     void init();

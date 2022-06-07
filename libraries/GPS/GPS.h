@@ -1,6 +1,8 @@
 #ifndef __GPS_H__
 #define __GPS_H__
 
+#include <Sensor.h>
+
 #include <SoftwareSerial.h>
 #include <Arduino.h>
 #include <TinyGPS++.h>
@@ -8,7 +10,7 @@
 #define VALID 1
 #define NOT_VALID 0
 
-class GPS {
+class GPS: public Sensor {
 
   public :
     GPS();

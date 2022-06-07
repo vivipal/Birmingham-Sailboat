@@ -1,11 +1,13 @@
 #ifndef __WINDSPEED_H__
 #define __WINDSPEED_H__
 
+#include <Sensor.h>
+
 
 #define WIND_SPEED_PIN 19
 
 
-class WindSpeed {
+class WindSpeed: public Sensor {
 
   public:
     WindSpeed();
@@ -21,7 +23,7 @@ class WindSpeed {
     unsigned int m_nb_rotations=0;
     double m_contact_bounce_time=0;
     double m_time_anemometer=0;
-    float m_wind_speed = 0;
+    float m_wind_speed=0;
 };
 
 

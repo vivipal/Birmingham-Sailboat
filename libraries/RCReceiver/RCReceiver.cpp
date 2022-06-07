@@ -4,14 +4,15 @@
 
 
 RC::RC(){
-  m_offsetmin[0] = 1140;
-  m_offsetmax[0] = 1812;
-  m_offsetmin[1] = 1076;
-  m_offsetmax[1] = 1944;
-  m_filtered_value[0]=0;
-  m_filtered_value[1]=0;
-  m_raw_value[0]=0;
-  m_raw_value[1]=0;
+  m_offsetmin[RUDDER_CHANNEL] = RUDDER_OFFSETMIN;
+  m_offsetmax[RUDDER_CHANNEL] = RUDDER_OFFSETMAX;
+  m_offsetmin[SAIL_CHANNEL] = SAIL_OFFSETMIN;
+  m_offsetmax[SAIL_CHANNEL] = SAIL_OFFSETMAX;
+
+  m_filtered_value[RUDDER_CHANNEL]=0;
+  m_filtered_value[SAIL_CHANNEL]=0;
+  m_raw_value[RUDDER_CHANNEL]=0;
+  m_raw_value[SAIL_CHANNEL]=0;
 
   m_last_interrupt = 0;
 

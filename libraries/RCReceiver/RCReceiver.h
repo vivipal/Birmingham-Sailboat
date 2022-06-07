@@ -2,9 +2,7 @@
 #define __RCRECEIVER_H__
 
 #include <Sensor.h>
-
-
-#define CHANNEL_NB 2 // we are considering only 2 channels
+#include <Config.h>
 
 class RC: public Sensor{
   public :

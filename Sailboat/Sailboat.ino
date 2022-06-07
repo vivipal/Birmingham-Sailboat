@@ -10,62 +10,53 @@ Sailboat boat;
 
 Logger logger;
 
-Servo_Motor rudderServo(0,143,428,-90,90);
-Servo_Motor sailServo(1,151,417,0,2160);
-
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 // Interrupt function for the anemometer
 void AnemometerRotation() { boat.ws()->newRotation(); }
-void intCH1() { boat.rc()->interruptCH(2,0); }
-void intCH2() { boat.rc()->interruptCH(3,1); }
+void intCH1() { boat.rc()->interruptCH(RUDDER_CHANNEL_PIN,RUDDER_CHANNEL); }
+void intCH2() { boat.rc()->interruptCH(SAIL_CHANNEL_PIN,SAIL_CHANNEL); }
 
 void setup(){
 
   Serial.begin(9600);
 
-  boat.init();
+  boat.init(&pwm);
+
   attachInterrupt(digitalPinToInterrupt(WIND_SPEED_PIN), AnemometerRotation, FALLING);
-
-  rudderServo.init(&pwm);
-  sailServo.init(&pwm);
-
-
-  pinMode(2, INPUT); attachInterrupt(digitalPinToInterrupt(2), intCH1, CHANGE);
-  pinMode(3, INPUT); attachInterrupt(digitalPinToInterrupt(3), intCH2, CHANGE);
+  pinMode(RUDDER_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(RUDDER_CHANNEL_PIN), intCH1, CHANGE);
+  pinMode(SAIL_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(SAIL_CHANNEL_PIN), intCH2, CHANGE);
 
   logger.init();
   logger.open();
   logger.write("LOG :\n\n");
 
-  Serial.println("Setup done");
-  Serial.println("----------\n");
+  Serial.println("Setup done"); Serial.println("----------\n");
 }
 
 
 
 void loop(){
-  if (boat.rc()->isReceiving()){
-    throttle = boat.rc()->getValue(0);
-    steering = boat.rc()->getValue(1);
+  switch (boat.controlMode()) {
+    case RADIO_CONTROLLED:
+      boat.updateServos();
+      throttle = boat.rc()->getValue(SAIL_CHANNEL);
+      steering = boat.rc()->getValue(RUDDER_CHANNEL);
 
-    rudderServo.set(steering);
-    sailServo.set(throttle);
 
-    displayDataB();
-  } else  {
-    boat.updateSensors();
+      displayDataB();
+      break;
 
-    dir = boat.wd()->getDirection();
-    spd = boat.ws()->getSpeed();
-    angle = boat.compass()->getAngle();
-    lati = boat.gps()->getLat(); lon = boat.gps()->getLon();
-
-    if(abs(dir - last_dir) > 5 || abs(spd - last_speed) > 0.5 || abs(angle - last_angle) > 0.5|| abs(lati - last_lati) > 0.|| abs(lon - last_lon) > 0.5){
-      displayDataA();
-      logDataA();
-    }
+    case AUTONOMOUS:
+      boat.updateSensors();
+      dir = boat.wd()->getDirection(); spd = boat.ws()->getSpeed(); angle = boat.compass()->getAngle(); lati = boat.gps()->getLat(); lon = boat.gps()->getLon();
+      if(abs(dir - last_dir) > 5 || abs(spd - last_speed) > 0.5 || abs(angle - last_angle) > 0.5|| abs(lati - last_lati) > 0.|| abs(lon - last_lon) > 0.5){
+        displayDataA();logDataA();
+      }
+      break;
   }
+
+
 }
 
 void displayDataA(){
@@ -83,19 +74,17 @@ void displayDataA(){
 }
 
 void logDataA(){
-
   logger.write(dir); logger.write(";");
   logger.write(spd); logger.write(";");
   logger.write(angle); logger.write(";");
   logger.write(lati); logger.write(";");
   logger.write(lon); logger.write("\n");
   logger.flush();
-
 }
 
 void displayDataB(){
-  Serial.print(steering);
-  Serial.print(";");
   Serial.print(throttle);
+  Serial.print(";");
+  Serial.print(steering);
   Serial.println("\t");
 }

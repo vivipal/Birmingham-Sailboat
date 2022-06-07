@@ -2,14 +2,11 @@
 #define __CMPS12_H__
 
 #include <Sensor.h>
+#include <Config.h>
 
 #include <SoftwareSerial.h>
 #include <Arduino.h>
 
-#define CMPS_GET_ANGLE8 0x12
-#define CMPS_GET_ANGLE16 0x13
-#define CMPS_GET_PITCH 0x14
-#define CMPS_GET_ROLL 0x15
 
 class CMPS12: public Sensor {
   public:

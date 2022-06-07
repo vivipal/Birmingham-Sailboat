@@ -2,10 +2,10 @@
 
 
 
-GPS::GPS() : ss(12,13){}
+GPS::GPS() : ss(GPS_PIN_RX,GPS_PIN_TX){}
 
 void GPS::init(){
-  ss.begin(9600);
+  ss.begin(GPS_BAUDRATE);
 }
 
 GPS::~GPS(){}

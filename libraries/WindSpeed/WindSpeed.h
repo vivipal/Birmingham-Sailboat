@@ -2,9 +2,8 @@
 #define __WINDSPEED_H__
 
 #include <Sensor.h>
+#include <Config.h>
 
-
-#define WIND_SPEED_PIN 19
 
 
 class WindSpeed: public Sensor {

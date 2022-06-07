@@ -52,9 +52,43 @@ enum servos_name {NAME_RUDDER, NAME_SAIL};
 enum control_mode {RADIO_CONTROLLED, AUTONOMOUS};
 /////////////////////////////
 
+///////  GPS CONFIG  ///////
+#define GPS_PIN_RX 12
+#define GPS_PIN_TX 13
+#define GPS_BAUDRATE 9600
+/////////////////////////////
+
+
+///////  CMPS CONFIG  ///////
+#define CMPS_PIN_RX 10
+#define CMPS_PIN_TX 11
+#define CMPS_BAUDRATE 9600
+
+
+#define CMPS_GET_ANGLE8 0x12
+#define CMPS_GET_ANGLE16 0x13
+#define CMPS_GET_PITCH 0x14
+#define CMPS_GET_ROLL 0x15
+
+////////////////////////////
+
+/////////  SD CONFIG /////////
+#define PIN_SD_CARD 53 // SS pin  (50 (MISO), 51 (MOSI), 52 (SCK))
+/////////////////////////////
 
 
 
+/////////  W DIR CONFIG /////////
+#define WIND_DIRECTION_PIN A14
+#define WIND_DIRECTION_SENSOR_MIN 0
+#define WIND_DIRECTION_SENSOR_MAX 1023
+////////////////////////////////
+
+
+
+/////////  W DIR CONFIG /////////
+#define WIND_SPEED_PIN 19
+////////////////////////////////
 
 
 #endif

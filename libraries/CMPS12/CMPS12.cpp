@@ -1,12 +1,13 @@
 #include "CMPS12.h"
 
 
-CMPS12::CMPS12(): ss(10,11){
+
+CMPS12::CMPS12(): ss(CMPS_PIN_RX,CMPS_PIN_TX){
 
 }
 
 void CMPS12::init(){
-  ss.begin(9600);
+  ss.begin(CMPS_BAUDRATE);
 }
 
 CMPS12::~CMPS12(){

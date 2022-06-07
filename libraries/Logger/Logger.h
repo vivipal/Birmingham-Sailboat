@@ -2,8 +2,7 @@
 #define __LOGGER_H__
 
 #include <SD.h>
-
-#define PIN_SD_CARD 53 // SS pin  (50 (MISO), 51 (MOSI), 52 (SCK))
+#include <Config.h>
 
 
 

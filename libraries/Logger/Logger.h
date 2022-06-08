@@ -21,11 +21,14 @@ class Logger {
     void write(float val);
     void write(double val);
 
+    String generateFilename();
+
+
 
 
   private:
     File m_file;
-    String m_filename = "test.txt";
+    String m_filename;
 };
 
 

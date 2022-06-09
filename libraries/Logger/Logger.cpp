@@ -76,8 +76,10 @@ String Logger::generateFilename() {
 void Logger::newLog(){
 
 
-  if (m_boat){
+  if ((m_boat) && ((millis()-m_last_log)>LOG_PERIOD)){
+    m_last_log = millis();
 
+    
     write(m_boat->controlMode());write(";"); // control mode of the boat
 
     write(m_boat->gps()->getDate());write("-"); // date

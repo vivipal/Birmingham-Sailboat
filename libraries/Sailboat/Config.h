@@ -91,4 +91,9 @@ enum control_mode {RADIO_CONTROLLED, AUTONOMOUS};
 ////////////////////////////////
 
 
+//////////  LOG CONFIG //////////
+#define LOG_PERIOD 500 // milliseconds
+////////////////////////////////
+
+
 #endif

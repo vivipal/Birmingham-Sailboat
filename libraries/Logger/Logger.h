@@ -35,6 +35,7 @@ class Logger {
     String m_filename;
     unsigned long int m_nb_entry;
     int m_serial_logging;
+    unsigned int m_last_log=0;
 
     Sailboat* m_boat = NULL;
 };

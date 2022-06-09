@@ -1,5 +1,5 @@
-#include "Sailboat.h"
-
+#include <Sailboat.h>
+  
 int last_dir=-50, last_angle = -50;
 int dir, angle;
 float last_speed = -50, spd;
@@ -27,7 +27,7 @@ void setup(){
   pinMode(RUDDER_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(RUDDER_CHANNEL_PIN), intCH1, CHANGE);
   pinMode(SAIL_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(SAIL_CHANNEL_PIN), intCH2, CHANGE);
 
-  logger.init();
+  logger.init(&boat,1);
   logger.open();
   logger.write("LOG :\n\n");
 
@@ -44,15 +44,16 @@ void loop(){
       steering = boat.rc()->getValue(RUDDER_CHANNEL);
 
 
-      displayDataB();
+//      displayDataB();
       break;
 
     case AUTONOMOUS:
       boat.updateSensors();
-      dir = boat.wd()->getDirection(); spd = boat.ws()->getSpeed(); angle = boat.compass()->getAngle(); lati = boat.gps()->getLat(); lon = boat.gps()->getLon();
-      if(abs(dir - last_dir) > 5 || abs(spd - last_speed) > 0.5 || abs(angle - last_angle) > 0.5|| abs(lati - last_lati) > 0.|| abs(lon - last_lon) > 0.5){
-        displayDataA();logDataA();
-      }
+      logger.newLog();
+//      dir = boat.wd()->getDirection(); spd = boat.ws()->getSpeed(); angle = boat.compass()->getAngle(); lati = boat.gps()->getLat(); lon = boat.gps()->getLon();
+//      if(abs(dir - last_dir) > 5 || abs(spd - last_speed) > 0.5 || abs(angle - last_angle) > 0.5|| abs(lati - last_lati) > 0.|| abs(lon - last_lon) > 0.5){
+//        displayDataA();logDataA();
+//      }
       break;
   }
 

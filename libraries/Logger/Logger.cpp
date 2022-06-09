@@ -11,9 +11,14 @@ Logger::~Logger(){
   close();
 }
 
-void Logger::init(){
+void Logger::init(Sailboat *boat,int enableSerialLogging = 0){
   SD.begin(PIN_SD_CARD);
   SD.mkdir("LOG");
+
+  m_boat = boat;
+
+  m_serial_logging = enableSerialLogging;
+  m_nb_entry = 0;
 }
 
 void Logger::open(){
@@ -28,19 +33,24 @@ void Logger::close(){
 }
 
 void Logger::write(String msg){
-  m_file.print(msg);
+   m_file.print(msg);
+   if (m_serial_logging) { Serial.print(msg); }
 }
-
 void Logger::write(int val){
-  m_file.print(val);
+   m_file.print(val);
+   if (m_serial_logging) { Serial.print(val); }
 }
-
+void Logger::write(unsigned long int val){
+   m_file.print(val);
+   if (m_serial_logging) { Serial.print(val); }
+}
 void Logger::write(float val){
-  m_file.print(val);
+   m_file.print(val);
+   if (m_serial_logging) { Serial.print(val); }
 }
-
 void Logger::write(double val){
-  m_file.print(val);
+   m_file.print(val);
+   if (m_serial_logging) { Serial.print(val); }
 }
 
 String Logger::generateFilename() {
@@ -61,4 +71,33 @@ String Logger::generateFilename() {
 
 
   return SDFileName;
+}
+
+void Logger::newLog(){
+
+
+  if (m_boat){
+
+    write(m_boat->controlMode());write(";"); // control mode of the boat
+
+    write(m_boat->gps()->getDate());write("-"); // date
+    write(m_boat->gps()->getTime());write(";"); // time
+
+
+    write(m_boat->wd()->getDirection());write(";"); // direction opf the wind
+    write(m_boat->ws()->getSpeed());write(";"); // speed of the wind
+    write(m_boat->compass()->getAngle());write(";"); // heading of the boat
+    write(m_boat->gps()->getSpeed());write(";"); // speed of the boat (gps)
+
+    write(m_boat->gps()->getLat());write(";"); // latitude
+    write(m_boat->gps()->getLon());write(";"); // longitude
+
+    if (m_boat->controlMode()==RADIO_CONTROLLED) {
+      write(m_boat->rc()->getValue(SAIL_CHANNEL));write(";"); // sail command
+      write(m_boat->rc()->getValue(RUDDER_CHANNEL));write(";"); // rudder command
+    }
+    write("\n\r");
+    m_nb_entry++;
+  }
+  flush();
 }

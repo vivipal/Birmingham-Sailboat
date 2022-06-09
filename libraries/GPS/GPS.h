@@ -30,12 +30,15 @@ class GPS: public Sensor {
     double getLon();
     float getSpeed();
     float getElev();
-    float geth();
-    float getm();
-    float gets();
-    float getM();
-    float getD();
-    float getY();
+
+    int getTime();
+    int geth();
+    int getm();
+    int gets();
+    int getDate();
+    int getM();
+    int getD();
+    int getY();
 
   private:
     SoftwareSerial ss;

@@ -22,6 +22,7 @@ class GPS: public Sensor {
 
     int locationStatus();
     int speedStatus();
+    int courseStatus();
     int timeStatus();
     int dateStatus();
     int elevationStatus();
@@ -29,6 +30,7 @@ class GPS: public Sensor {
     double getLat();
     double getLon();
     float getSpeed();
+    float getCourse();
     float getElev();
 
     int getTime();

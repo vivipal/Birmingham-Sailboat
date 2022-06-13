@@ -21,6 +21,7 @@ double GPS::getLat(){return locationStatus() ? gps.location.lat() : 99999;}
 double GPS::getLon(){return locationStatus() ? gps.location.lng() : 99999;}
 
 float GPS::getSpeed(){return speedStatus() ? gps.speed.kmph() : -1;}
+float GPS::getCourse(){return courseStatus() ? gps.course.deg() : -1;}
 float GPS::getElev(){return elevationStatus() ? gps.altitude.meters() : 99999;}
 
 int GPS::getTime(){return timeStatus() ? gps.time.value() : 0;}
@@ -39,6 +40,10 @@ int GPS::locationStatus(){
 
 int GPS::speedStatus(){
   return gps.speed.isValid() ? VALID : NOT_VALID;
+}
+
+int GPS::courseStatus(){
+  return gps.course.isValid() ? VALID : NOT_VALID;
 }
 
 int GPS::timeStatus(){

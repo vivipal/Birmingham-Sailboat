@@ -38,12 +38,17 @@ class Sailboat {
     void updateServos();
     int controlMode();
 
+    void updateTrueWindDirection();
+    float getTrueWindDirection(){return m_true_wind_dir;};
+
 
 
   private:
 
     Sensor* m_sensor[NB_SENSORS];
     Servo_Motor* m_servo[NB_SERVOS];
+
+    float m_true_wind_dir=0;
 
 
 

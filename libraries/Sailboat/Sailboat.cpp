@@ -42,6 +42,8 @@ void Sailboat::updateSensors(){
   for (size_t i = 0; i < NB_SENSORS; i++) {
     m_sensor[i]->update();
   }
+
+  updateTrueWindDirection();
 }
 
 void Sailboat::updateServos(){
@@ -50,3 +52,24 @@ void Sailboat::updateServos(){
 }
 
 int Sailboat::controlMode(){return rc()->isReceiving() ? RADIO_CONTROLLED : AUTONOMOUS;}
+
+
+void Sailboat::updateTrueWindDirection(){
+
+  if (gps->speedStatus() && gps->courseStatus()){
+
+    float SOG = gps()->getSpeed();
+    float COG = gps()->getCourse()*180/M_PI;
+
+    float AWD = ((int)(wd()->getDirection() + compass()->getAngle())%360)*180/M_PI;
+    float AWS = ws()->getSpeed();
+
+    float u = SOG*sin(COG) - AWS*sin(AWD);
+    float v = SOG*cos(COG) - AWS*cos(AWD);
+
+    m_true_wind_dir = atan2(u,v);
+  } else {
+    m_true_wind_dir = -1;
+  }
+
+}

@@ -56,7 +56,7 @@ int Sailboat::controlMode(){return rc()->isReceiving() ? RADIO_CONTROLLED : AUTO
 
 void Sailboat::updateTrueWindDirection(){
 
-  if (gps->speedStatus() && gps->courseStatus()){
+  if (gps()->speedStatus() && gps()->courseStatus()){
 
     float SOG = gps()->getSpeed();
     float COG = gps()->getCourse()*180/M_PI;

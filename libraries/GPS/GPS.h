@@ -33,11 +33,9 @@ class GPS: public Sensor {
     float getCourse();
     float getElev();
 
-    int getTime();
     int geth();
     int getm();
     int gets();
-    int getDate();
     int getM();
     int getD();
     int getY();

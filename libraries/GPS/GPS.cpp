@@ -24,12 +24,10 @@ float GPS::getSpeed(){return speedStatus() ? gps.speed.kmph() : -1;}
 float GPS::getCourse(){return courseStatus() ? gps.course.deg() : -1;}
 float GPS::getElev(){return elevationStatus() ? gps.altitude.meters() : 99999;}
 
-int GPS::getTime(){return timeStatus() ? gps.time.value() : 0;}
 int GPS::geth(){return timeStatus() ? gps.time.hour() : -1;}
 int GPS::getm(){return timeStatus() ? gps.time.minute() : -1;}
 int GPS::gets(){return timeStatus() ? gps.time.second() : -1;}
 
-int GPS::getDate(){return dateStatus() ? gps.date.value() : 0;}
 int GPS::getM(){return dateStatus() ? gps.date.month() : -1;}
 int GPS::getD(){return dateStatus() ? gps.date.day() : -1;}
 int GPS::getY(){return dateStatus() ? gps.date.year() : -1;}

@@ -59,8 +59,8 @@ enum control_mode {RADIO_CONTROLLED, AUTONOMOUS};
 #define GPS_BAUDRATE 9600
 
 struct COORD {
-  float x = 0;
-  float y = 0;
+  double x = 0;
+  double y = 0;
 };
 /////////////////////////////
 

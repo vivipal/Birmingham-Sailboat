@@ -42,7 +42,7 @@ class GPS: public Sensor {
     int getD();
     int getY();
 
-    COORD getXY(float lat_0, float lon_0);
+    COORD getXY(double lat_0=52.489471, double lon_0=-1.898575);
   private:
     SoftwareSerial ss;
     TinyGPSPlus gps;

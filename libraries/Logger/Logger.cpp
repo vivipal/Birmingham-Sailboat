@@ -45,12 +45,12 @@ void Logger::write(unsigned long int val){
    if (m_serial_logging) { Serial.print(val); }
 }
 void Logger::write(float val){
-   m_file.print(val);
-   if (m_serial_logging) { Serial.print(val); }
+   m_file.print(val,5);
+   if (m_serial_logging) { Serial.print(val,5); }
 }
 void Logger::write(double val){
-   m_file.print(val);
-   if (m_serial_logging) { Serial.print(val); }
+   m_file.print(val,8);
+   if (m_serial_logging) { Serial.print(val,8); }
 }
 
 String Logger::generateFilename() {
@@ -79,7 +79,6 @@ void Logger::newLog(){
   if ((m_boat) && ((millis()-m_last_log)>LOG_PERIOD)){
     m_last_log = millis();
 
-    
     write(m_boat->controlMode());write(";"); // control mode of the boat
 
     write(m_boat->gps()->getDate());write("-"); // date

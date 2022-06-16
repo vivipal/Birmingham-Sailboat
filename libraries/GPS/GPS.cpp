@@ -58,13 +58,13 @@ int GPS::elevationStatus(){
   return gps.altitude.isValid() ? VALID : NOT_VALID;
 }
 
-COORD GPS::getXY(float lat_0=52.489471, float lon_0=-1.898575){
+COORD GPS::getXY(double lat_0=52.489471, double lon_0=-1.898575){
 
-  float lat = gps.location.lat();
-  float lon = gps.location.lng();
+  double lat = gps.location.lat();
+  double lon = gps.location.lng();
 
-  float x_tilde = EARTH_RADIUS * cos(lat*M_PI/180)*(lon-lon_0)*M_PI/180;
-  float y_tilde = EARTH_RADIUS * (lat-lat_0)*M_PI/180;
+  double x_tilde = EARTH_RADIUS * cos(lat*M_PI/180)*(lon-lon_0)*M_PI/180;
+  double y_tilde = EARTH_RADIUS * (lat-lat_0)*M_PI/180;
 
   COORD c;
   c.x = x_tilde;

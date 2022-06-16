@@ -4,6 +4,7 @@
 #define __CONFIG_H__
 
 
+#define EARTH_RADIUS 6372800 // Earth radius in meter
 
 //////  SENSORS CONFIG //////
 #define NB_SENSORS 5
@@ -56,6 +57,11 @@ enum control_mode {RADIO_CONTROLLED, AUTONOMOUS};
 #define GPS_PIN_RX 12
 #define GPS_PIN_TX 13
 #define GPS_BAUDRATE 9600
+
+struct COORD {
+  float x = 0;
+  float y = 0;
+};
 /////////////////////////////
 
 

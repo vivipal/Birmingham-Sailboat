@@ -42,6 +42,7 @@ class GPS: public Sensor {
     int getD();
     int getY();
 
+    COORD getXY(float lat_0, float lon_0);
   private:
     SoftwareSerial ss;
     TinyGPSPlus gps;

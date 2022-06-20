@@ -14,7 +14,7 @@ class Logger {
   public:
     Logger();
     ~Logger();
-    void init(Sailboat *boat, int enableSerialLogging);
+    void init(Sailboat *boat);
     void open();
     void close();
     void flush(){m_file.flush();};
@@ -34,7 +34,6 @@ class Logger {
     File m_file;
     String m_filename;
     unsigned long int m_nb_entry;
-    int m_serial_logging;
     unsigned int m_last_log=0;
 
     Sailboat* m_boat = NULL;

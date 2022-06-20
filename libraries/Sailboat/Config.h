@@ -4,6 +4,19 @@
 #define __CONFIG_H__
 
 
+/////  GLOBAL CONFIG /////
+
+
+#define ENABLE_SERIAL 1
+#define ENABLE_LOGGING 0 
+#define ENABLE_XBEE 1
+
+
+//////////////////////////
+
+
+
+
 #define EARTH_RADIUS 6372800 // Earth radius in meter
 
 //////  SENSORS CONFIG //////

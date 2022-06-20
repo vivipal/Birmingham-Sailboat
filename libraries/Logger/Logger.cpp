@@ -11,13 +11,11 @@ Logger::~Logger(){
   close();
 }
 
-void Logger::init(Sailboat *boat,int enableSerialLogging = 0){
+void Logger::init(Sailboat *boat){
   SD.begin(PIN_SD_CARD);
   SD.mkdir("LOG");
 
   m_boat = boat;
-
-  m_serial_logging = enableSerialLogging;
   m_nb_entry = 0;
 }
 
@@ -33,24 +31,24 @@ void Logger::close(){
 }
 
 void Logger::write(String msg){
-   m_file.print(msg);
-   if (m_serial_logging) { Serial.print(msg); }
+  if (ENABLE_LOGGING){m_file.print(msg);}
+  if (ENABLE_SERIAL){Serial.print(msg); }
 }
 void Logger::write(int val){
-   m_file.print(val);
-   if (m_serial_logging) { Serial.print(val); }
+  if (ENABLE_LOGGING){m_file.print(val);}
+  if (ENABLE_SERIAL){Serial.print(val); }
 }
 void Logger::write(unsigned long int val){
-   m_file.print(val);
-   if (m_serial_logging) { Serial.print(val); }
+  if (ENABLE_LOGGING){m_file.print(val);}
+  if (ENABLE_SERIAL){Serial.print(val); }
 }
 void Logger::write(float val){
-   m_file.print(val,5);
-   if (m_serial_logging) { Serial.print(val,5); }
+  if (ENABLE_LOGGING){m_file.print(val,5);}
+  if (ENABLE_SERIAL){Serial.print(val,5); }
 }
 void Logger::write(double val){
-   m_file.print(val,8);
-   if (m_serial_logging) { Serial.print(val,8); }
+  if (ENABLE_LOGGING){m_file.print(val,8);}
+  if (ENABLE_SERIAL){Serial.print(val,8); }
 }
 
 String Logger::generateFilename() {

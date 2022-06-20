@@ -11,8 +11,10 @@
 #include <ServoController.h>
 #include <RCReceiver.h>
 #include <Logger.h>
+#include <XBEE.h>
 
 
+class XBEE;
 
 
 class Sailboat {
@@ -29,6 +31,7 @@ class Sailboat {
     CMPS12* compass();
     GPS* gps();
     RC* rc();
+    XBEE* xbee();
 
     Servo_Motor* rudderServo();
     Servo_Motor* sailServo();

@@ -8,6 +8,7 @@ Sailboat::Sailboat() {
   m_sensor[NAME_RC] = new RC();
   m_sensor[NAME_WDIRECTION] = new WindDirection();
   m_sensor[NAME_WSPEED] = new WindSpeed();
+  m_sensor[NAME_XBEE] = new XBEE();
 
   m_servo[NAME_RUDDER] = new Servo_Motor(RUDDER_PIN, RUDDER_PWMMIN, RUDDER_PWMMAX, RUDDER_ANGLEMIN, RUDDER_ANGLEMAX);
   m_servo[NAME_SAIL] = new Servo_Motor(SAIL_PIN, SAIL_PWMMIN, SAIL_PWMMAX, SAIL_ANGLEMIN, SAIL_ANGLEMAX);
@@ -34,6 +35,7 @@ WindSpeed* Sailboat::ws(){return (WindSpeed*) m_sensor[NAME_WSPEED];};
 CMPS12* Sailboat::compass(){return (CMPS12*) m_sensor[NAME_IMU];};
 GPS* Sailboat::gps(){return (GPS*) m_sensor[NAME_GPS];};
 RC* Sailboat::rc(){return (RC*) m_sensor[NAME_RC];};
+XBEE* Sailboat::xbee(){return (XBEE*) m_sensor[NAME_XBEE];};
 
 Servo_Motor* Sailboat::rudderServo(){return (Servo_Motor*) m_servo[NAME_RUDDER];};
 Servo_Motor* Sailboat::sailServo(){return (Servo_Motor*) m_servo[NAME_SAIL];};

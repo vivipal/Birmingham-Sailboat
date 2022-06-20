@@ -33,22 +33,27 @@ void Logger::close(){
 void Logger::write(String msg){
   if (ENABLE_LOGGING){m_file.print(msg);}
   if (ENABLE_SERIAL){Serial.print(msg); }
+  if (ENABLE_XBEE){m_boat->xbee()->serial().print(msg);}
 }
 void Logger::write(int val){
-  if (ENABLE_LOGGING){m_file.print(val);}
+  if (ENABLE_LOGGING && ((millis()-m_last_log)>LOG_PERIOD)){m_last_log = millis();m_file.print(val);}
   if (ENABLE_SERIAL){Serial.print(val); }
+  if (ENABLE_XBEE){m_boat->xbee()->serial().print(val);}
 }
 void Logger::write(unsigned long int val){
-  if (ENABLE_LOGGING){m_file.print(val);}
+  if (ENABLE_LOGGING && ((millis()-m_last_log)>LOG_PERIOD)){m_last_log = millis();m_file.print(val);}
   if (ENABLE_SERIAL){Serial.print(val); }
+  if (ENABLE_XBEE){m_boat->xbee()->serial().print(val);}
 }
 void Logger::write(float val){
-  if (ENABLE_LOGGING){m_file.print(val,5);}
+  if (ENABLE_LOGGING && ((millis()-m_last_log)>LOG_PERIOD)){m_last_log = millis();m_file.print(val,5);}
   if (ENABLE_SERIAL){Serial.print(val,5); }
+  if (ENABLE_XBEE){m_boat->xbee()->serial().print(val,5);}
 }
 void Logger::write(double val){
-  if (ENABLE_LOGGING){m_file.print(val,8);}
+  if (ENABLE_LOGGING && ((millis()-m_last_log)>LOG_PERIOD)){m_last_log = millis();m_file.print(val,8);}
   if (ENABLE_SERIAL){Serial.print(val,8); }
+  if (ENABLE_XBEE){m_boat->xbee()->serial().print(val,8);}
 }
 
 String Logger::generateFilename() {
@@ -74,8 +79,7 @@ String Logger::generateFilename() {
 void Logger::newLog(){
 
 
-  if ((m_boat) && ((millis()-m_last_log)>LOG_PERIOD)){
-    m_last_log = millis();
+  if ((m_boat)){
 
     write(m_boat->controlMode());write(";"); // control mode of the boat
 

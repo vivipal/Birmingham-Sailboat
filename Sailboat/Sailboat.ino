@@ -13,7 +13,7 @@ void intCH2() { boat.rc()->interruptCH(SAIL_CHANNEL_PIN,SAIL_CHANNEL); }
 
 void setup(){
 
-  Serial.begin(9600);
+  Serial.begin(57600);
 
   boat.init(&pwm);
 

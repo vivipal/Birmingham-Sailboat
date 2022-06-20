@@ -6,6 +6,10 @@
 #include <Config.h>
 #include <SoftwareSerial.h>
 #include <Arduino.h>
+#include <Sailboat.h>
+
+
+class Sailboat;
 
 class XBEE : public Sensor{
 
@@ -17,6 +21,7 @@ class XBEE : public Sensor{
 
     void update();
     int isReceiving();
+    const SoftwareSerial& serial(){return ss;}
 
 
 

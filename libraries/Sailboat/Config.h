@@ -20,8 +20,8 @@
 #define EARTH_RADIUS 6372800 // Earth radius in meter
 
 //////  SENSORS CONFIG //////
-#define NB_SENSORS 5
-enum sensors_name {NAME_IMU, NAME_GPS, NAME_RC, NAME_WDIRECTION, NAME_WSPEED};
+#define NB_SENSORS 6
+enum sensors_name {NAME_IMU, NAME_GPS, NAME_RC, NAME_WDIRECTION, NAME_WSPEED, NAME_XBEE};
 /////////////////////////////
 
 
@@ -118,7 +118,7 @@ struct COORD {
 
 
 //////////  LOG CONFIG //////////
-#define LOG_PERIOD 500 // milliseconds
+#define LOG_PERIOD 1000 // milliseconds
 ////////////////////////////////
 
 

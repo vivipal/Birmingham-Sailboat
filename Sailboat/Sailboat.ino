@@ -1,8 +1,5 @@
 #include <Sailboat.h>
 
-#define ENABLE_SERIAL 1
-
-
 Sailboat boat;
 
 Logger logger;
@@ -24,7 +21,7 @@ void setup(){
   pinMode(RUDDER_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(RUDDER_CHANNEL_PIN), intCH1, CHANGE);
   pinMode(SAIL_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(SAIL_CHANNEL_PIN), intCH2, CHANGE);
 
-  logger.init(&boat,ENABLE_SERIAL); logger.open();
+  logger.init(&boat); logger.open();
 
   Serial.println("Setup done"); Serial.println("----------\n");
 }

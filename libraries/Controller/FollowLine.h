@@ -50,8 +50,8 @@ class FollowLine: public Controller {
       float deltar = DELTARMAX / M_PI * sawtooth(theta-theta_bar);
       float deltasmax = M_PI/2 * pow((cos(psi-theta_bar)+1)/2,log(M_PI/2/BETA)/log(2));
 
-      m_rudder_setpoint = (m_deltar+DELTARMAX)/(2*DELTARMAX);
-      m_sail_setpoint = (m_deltasmax)/(ANGLE_SAILMAX*M_PI/180);
+      m_rudder_setpoint = (deltar+DELTARMAX)/(2*DELTARMAX);
+      m_sail_setpoint = (deltasmax)/(ANGLE_SAILMAX*M_PI/180);
     };
 
 

@@ -12,6 +12,7 @@ class Servo_Motor {
 
     void setPWM(unsigned int pulse);
     void set(float percent);
+    float getLastSet();
     float minPWM();
     float maxPWM();
 
@@ -28,6 +29,8 @@ class Servo_Motor {
     unsigned int m_pwmMax;
     float m_anglemin;
     float m_anglemax;
+
+    float m_last_set=-1;
 
 
 

@@ -95,10 +95,9 @@ void Logger::newLog(){
     write(m_boat->gps()->getLat());write(";"); // latitude
     write(m_boat->gps()->getLon());write(";"); // longitude
 
-    if (m_boat->controlMode()==RADIO_CONTROLLED) {
-      write(m_boat->rc()->getValue(SAIL_CHANNEL));write(";"); // sail command
-      write(m_boat->rc()->getValue(RUDDER_CHANNEL));write(";"); // rudder command
-    }
+    write(m_boat->sailServo()->getLastSet());write(";");
+    write(m_boat->rudderServo()->getLastSet());write(";");
+
     write("\n\r");
     m_nb_entry++;
   }

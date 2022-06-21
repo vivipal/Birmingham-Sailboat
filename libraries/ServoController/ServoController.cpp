@@ -29,10 +29,15 @@ float Servo_Motor::maxPWM(){
 }
 
 
+float Servo_Motor::getLastSet(){
+  return m_last_set;
+}
+
 void Servo_Motor::set(float percent){
   unsigned int pwm = (int) (m_pwmMax-m_pwmMin)*percent + m_pwmMin;
   if (pwm > m_pwmMax) {pwm = m_pwmMax;}
   if (pwm < m_pwmMin) {pwm = m_pwmMin;}
 
   setPWM(pwm);
+  m_last_set = percent;
 }

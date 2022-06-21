@@ -49,8 +49,20 @@ void Sailboat::updateSensors(){
 }
 
 void Sailboat::updateServos(){
-    m_servo[NAME_SAIL]->set( rc()->getValue(SAIL_CHANNEL) );
-    m_servo[NAME_RUDDER]->set( rc()->getValue(RUDDER_CHANNEL) );
+  switch (controlMode()){
+    case RADIO_CONTROLLED:
+      m_servo[NAME_SAIL]->set( rc()->getValue(SAIL_CHANNEL) );
+      m_servo[NAME_RUDDER]->set( rc()->getValue(RUDDER_CHANNEL) );
+      break;
+    case AUTONOMOUS:
+      if (m_controller->status()){
+        m_controller->updateCmd();
+        m_servo[NAME_SAIL]->set( m_controller->getSailCmd() );
+        m_servo[NAME_RUDDER]->set( m_controller->getRudderCmd() );
+      }
+      break;
+
+  }
 }
 
 int Sailboat::controlMode(){return rc()->isReceiving() ? RADIO_CONTROLLED : AUTONOMOUS;}

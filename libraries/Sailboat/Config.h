@@ -8,10 +8,11 @@
 
 
 #define ENABLE_SERIAL 1
-#define ENABLE_LOGGING 0 
+#define ENABLE_LOGGING 0
 #define ENABLE_XBEE 1
 
 
+#define ANGLE_SAILMAX 90
 //////////////////////////
 
 
@@ -120,6 +121,15 @@ struct COORD {
 //////////  LOG CONFIG //////////
 #define LOG_PERIOD 1000 // milliseconds
 ////////////////////////////////
+
+
+
+//////////  FOLLOW LINE //////////
+#define ZETA M_PI/4
+#define BETA 0.3
+#define DELTARMAX M_PI/4
+//////////////////////////////////
+
 
 
 #endif

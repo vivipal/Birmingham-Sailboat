@@ -1,8 +1,11 @@
 #include <Sailboat.h>
+#include <FollowLine.h>
 
 Sailboat boat;
 
 Logger logger;
+
+FollowLine c(&boat);
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
@@ -16,6 +19,8 @@ void setup(){
   Serial.begin(57600);
 
   boat.init(&pwm);
+  boat.attachedController(&c);
+  c.setLine(52.4884112,-1.886354,52.487302,-1.885140,5);
 
   attachInterrupt(digitalPinToInterrupt(WIND_SPEED_PIN), AnemometerRotation, FALLING);
   pinMode(RUDDER_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(RUDDER_CHANNEL_PIN), intCH1, CHANGE);
@@ -29,14 +34,7 @@ void setup(){
 
 
 void loop(){
-  switch (boat.controlMode()) {
-    case RADIO_CONTROLLED:
-      boat.updateServos();
-      break;
-
-    case AUTONOMOUS:
-      boat.updateSensors();
-      break;
-  }
+  boat.updateSensors();
+  boat.updateServos();
   logger.newLog();
 }

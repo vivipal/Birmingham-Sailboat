@@ -12,6 +12,7 @@
 #include <RCReceiver.h>
 #include <Logger.h>
 #include <XBEE.h>
+#include <ControllerInterface.h>
 
 
 class XBEE;
@@ -44,6 +45,11 @@ class Sailboat {
     void updateTrueWindDirection();
     float getTrueWindDirection(){return m_true_wind_dir;};
 
+    void attachedController(Controller* c){
+      if (m_controller){m_controller->disableController();}
+      m_controller = c;
+      m_controller->enableController();
+    }
 
 
   private:
@@ -53,6 +59,7 @@ class Sailboat {
 
     float m_true_wind_dir=0;
 
+    Controller* m_controller=NULL;
 
 
 };

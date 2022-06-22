@@ -1,25 +1,49 @@
 #include "XBEE.h"
 
 
-XBEE::XBEE() : ss(XBEE_PIN_RX,XBEE_PIN_TX){}
 
-void XBEE::init(){
-  ss.begin(XBEE_BAUDRATE);
+
+XBEE::XBEE(){}
+
+void XBEE::init(Sailboat* boat){
+  XBEE_SERIAL.begin(XBEE_BAUDRATE);
+  m_boat = boat;
 }
+
 
 XBEE::~XBEE(){}
 
 void XBEE::update(){
-  ss.listen();
-  if (ss.available()){
-    while (ss.available() > 0){
-      ss.read();
-    }
-    m_last_receive = millis();
+  while (XBEE_SERIAL.available()){
+    char c = Serial.read();
+    if (c=0x63){enterConfigMode();}
   }
 }
 
 
-int XBEE::isReceiving(){
-  return ss.available()||((millis-m_last_receive)<500);
+void XBEE::enterConfigMode(){ // just test for the moment
+  m_config_start = millis();
+  while (1){
+
+    if (XBEE_SERIAL.available()){
+      m_config_start = millis();
+      char c = XBEE_SERIAL.read();
+      switch (c){
+        case 0x67: // 'g'
+          while(XBEE_SERIAL.available()<10){
+            XBEE_SERIAL.println(XBEE_SERIAL.available());
+          }
+          XBEE_SERIAL.println("G");
+
+          break;
+        case 0x77: // 'w'
+          XBEE_SERIAL.println("W");
+
+          break;
+
+      }
+    }
+
+    if ((millis()-m_config_start)>5000){break;}
+  }
 }

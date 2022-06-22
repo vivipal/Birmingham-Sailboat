@@ -21,8 +21,8 @@
 #define EARTH_RADIUS 6372800 // Earth radius in meter
 
 //////  SENSORS CONFIG //////
-#define NB_SENSORS 6
-enum sensors_name {NAME_IMU, NAME_GPS, NAME_RC, NAME_WDIRECTION, NAME_WSPEED, NAME_XBEE};
+#define NB_SENSORS 5
+enum sensors_name {NAME_IMU, NAME_GPS, NAME_RC, NAME_WDIRECTION, NAME_WSPEED};
 /////////////////////////////
 
 
@@ -41,9 +41,8 @@ enum channel_name {RUDDER_CHANNEL,SAIL_CHANNEL};
 
 
 ////////  RC CONFIG ////////
-#define XBEE_PIN_RX 64
-#define XBEE_PIN_TX 65
-#define XBEE_BAUDRATE 57600
+#define XBEE_SERIAL Serial2
+#define XBEE_BAUDRATE 9600
 #define XBEE_PERIOD 10
 /////////////////////////////
 

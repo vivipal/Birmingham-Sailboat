@@ -2,34 +2,30 @@
 #define __XBEE_H__
 
 
-#include <Sensor.h>
 #include <Config.h>
-#include <SoftwareSerial.h>
 #include <Arduino.h>
 #include <Sailboat.h>
 
 
 class Sailboat;
 
-class XBEE : public Sensor{
+class XBEE {
 
 
   public :
     XBEE();
-    void init();
+    void init(Sailboat* boat);
     ~XBEE();
 
     void update();
-    int isReceiving();
-    const SoftwareSerial& serial(){return ss;}
 
-
+    void enterConfigMode();
 
   private:
-    SoftwareSerial ss;
     unsigned int m_last_receive = 0;
 
-
+    Sailboat* m_boat=NULL;
+    unsigned long m_config_start;
 };
 
 

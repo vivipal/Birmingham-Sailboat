@@ -55,6 +55,7 @@ class Sailboat {
   private:
 
     Sensor* m_sensor[NB_SENSORS];
+    XBEE* m_xbee;
     Servo_Motor* m_servo[NB_SERVOS];
 
     float m_true_wind_dir=0;

@@ -27,6 +27,7 @@ void setup(){
   pinMode(SAIL_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(SAIL_CHANNEL_PIN), intCH2, CHANGE);
 
   logger.init(&boat); logger.open();
+  boat.xbee()->init(&boat);
 
   Serial.println("Setup done"); Serial.println("----------\n");
 }

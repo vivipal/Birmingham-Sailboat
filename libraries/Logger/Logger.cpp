@@ -31,29 +31,29 @@ void Logger::close(){
 }
 
 void Logger::write(String msg){
-  if (ENABLE_LOGGING){m_file.print(msg);}
+  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(msg);}
   if (ENABLE_SERIAL){Serial.print(msg); }
-  if (ENABLE_XBEE){m_boat->xbee()->serial().print(msg);}
+  if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){m_boat->xbee()->serial().print(msg);}
 }
 void Logger::write(int val){
-  if (ENABLE_LOGGING && ((millis()-m_last_log)>LOG_PERIOD)){m_last_log = millis();m_file.print(val);}
+  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val);}
   if (ENABLE_SERIAL){Serial.print(val); }
-  if (ENABLE_XBEE){m_boat->xbee()->serial().print(val);}
+  if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){m_boat->xbee()->serial().print(val);}
 }
 void Logger::write(unsigned long int val){
-  if (ENABLE_LOGGING && ((millis()-m_last_log)>LOG_PERIOD)){m_last_log = millis();m_file.print(val);}
+  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val);}
   if (ENABLE_SERIAL){Serial.print(val); }
-  if (ENABLE_XBEE){m_boat->xbee()->serial().print(val);}
+  if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){m_boat->xbee()->serial().print(val);}
 }
 void Logger::write(float val){
-  if (ENABLE_LOGGING && ((millis()-m_last_log)>LOG_PERIOD)){m_last_log = millis();m_file.print(val,5);}
+  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val,5);}
   if (ENABLE_SERIAL){Serial.print(val,5); }
-  if (ENABLE_XBEE){m_boat->xbee()->serial().print(val,5);}
+  if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){m_boat->xbee()->serial().print(val,5);}
 }
 void Logger::write(double val){
-  if (ENABLE_LOGGING && ((millis()-m_last_log)>LOG_PERIOD)){m_last_log = millis();m_file.print(val,8);}
+  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val,8);}
   if (ENABLE_SERIAL){Serial.print(val,8); }
-  if (ENABLE_XBEE){m_boat->xbee()->serial().print(val,8);}
+  if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){m_boat->xbee()->serial().print(val,8);}
 }
 
 String Logger::generateFilename() {
@@ -81,6 +81,8 @@ void Logger::newLog(){
 
   if ((m_boat)){
 
+    m_time = millis();
+
     write(m_boat->controlMode());write(";"); // control mode of the boat
 
     write(m_boat->gps()->getD());write(m_boat->gps()->getM());write(m_boat->gps()->getY());write("-"); // date
@@ -100,6 +102,10 @@ void Logger::newLog(){
 
     write("\n\r");
     m_nb_entry++;
+
+    if ((millis()-m_last_log)>LOG_PERIOD){m_last_log=millis();}
+    if ((millis()-m_last_xbee)>XBEE_PERIOD){m_last_xbee=millis();}
+
   }
   flush();
 }

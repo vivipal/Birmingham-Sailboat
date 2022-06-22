@@ -44,6 +44,7 @@ enum channel_name {RUDDER_CHANNEL,SAIL_CHANNEL};
 #define XBEE_PIN_RX 64
 #define XBEE_PIN_TX 65
 #define XBEE_BAUDRATE 57600
+#define XBEE_PERIOD 10
 /////////////////////////////
 
 

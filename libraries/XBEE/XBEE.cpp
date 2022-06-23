@@ -15,24 +15,45 @@ XBEE::~XBEE(){}
 
 void XBEE::update(){
   while (XBEE_SERIAL.available()){
-    char c = Serial.read();
-    if (c=0x63){enterConfigMode();}
+    unsigned char c = XBEE_SERIAL.read();
+    if (c==0x63){enterConfigMode();}
+    else if (c==0x69){sendInfo();}
   }
+}
+
+
+void XBEE::sendInfo(){
+  XBEE_SERIAL.print(m_boat->controlMode());XBEE_SERIAL.print(";"); // control mode of the boat
+
+  XBEE_SERIAL.print(m_boat->gps()->getD());XBEE_SERIAL.print(m_boat->gps()->getM());XBEE_SERIAL.print(m_boat->gps()->getY());XBEE_SERIAL.print("-"); // date
+  XBEE_SERIAL.print(m_boat->gps()->geth());XBEE_SERIAL.print(m_boat->gps()->getm());XBEE_SERIAL.print(m_boat->gps()->gets());XBEE_SERIAL.print(";"); //time
+
+
+  XBEE_SERIAL.print(m_boat->wd()->getDirection());XBEE_SERIAL.print(";"); // direction opf the wind
+  XBEE_SERIAL.print(m_boat->ws()->getSpeed());XBEE_SERIAL.print(";"); // speed of the wind
+  XBEE_SERIAL.print(m_boat->compass()->getAngle());XBEE_SERIAL.print(";"); // heading of the boat
+  XBEE_SERIAL.print(m_boat->gps()->getSpeed());XBEE_SERIAL.print(";"); // speed of the boat (gps)
+
+  XBEE_SERIAL.print(m_boat->gps()->getLat(),8);XBEE_SERIAL.print(";"); // latitude
+  XBEE_SERIAL.print(m_boat->gps()->getLon(),8);XBEE_SERIAL.print(";"); // longitude
+
+  XBEE_SERIAL.print(m_boat->sailServo()->getLastSet());XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(m_boat->rudderServo()->getLastSet());XBEE_SERIAL.print(";");
+
+  XBEE_SERIAL.print("\n\r");
 }
 
 
 void XBEE::enterConfigMode(){ // just test for the moment
   m_config_start = millis();
+  XBEE_SERIAL.println("Enter config mode.");
   while (1){
 
     if (XBEE_SERIAL.available()){
       m_config_start = millis();
-      char c = XBEE_SERIAL.read();
+      unsigned char c = XBEE_SERIAL.read();
       switch (c){
         case 0x67: // 'g'
-          while(XBEE_SERIAL.available()<10){
-            XBEE_SERIAL.println(XBEE_SERIAL.available());
-          }
           XBEE_SERIAL.println("G");
 
           break;
@@ -43,7 +64,7 @@ void XBEE::enterConfigMode(){ // just test for the moment
 
       }
     }
-
     if ((millis()-m_config_start)>5000){break;}
   }
+  XBEE_SERIAL.println("Exit config mode.");
 }

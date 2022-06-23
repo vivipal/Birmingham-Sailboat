@@ -9,7 +9,7 @@
 
 #define ENABLE_SERIAL 1
 #define ENABLE_LOGGING 0
-#define ENABLE_XBEE 1
+#define ENABLE_XBEE 0
 
 
 #define ANGLE_SAILMAX 90

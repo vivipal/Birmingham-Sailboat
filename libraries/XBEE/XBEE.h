@@ -19,6 +19,7 @@ class XBEE {
 
     void update();
 
+    void sendInfo();
     void enterConfigMode();
 
   private:

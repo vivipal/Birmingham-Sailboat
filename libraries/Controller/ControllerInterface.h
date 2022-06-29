@@ -10,7 +10,9 @@ class Sailboat;
 class Controller {
 
   public:
-    Controller(Sailboat *boat): m_boat(boat){};
+    Controller(){};
+
+    init(Sailboat* boat){m_boat=boat;}
 
     virtual void updateCmd();
 
@@ -22,11 +24,14 @@ class Controller {
     int status(){return m_enabled;}
 
 
-    Sailboat* m_boat = NULL;
+  protected:
 
+    Sailboat* m_boat = NULL;
 
     float m_rudder_setpoint=0.5; // percentage
     float m_sail_setpoint=0.5; // percentage
+
+  private:
     int m_enabled=0;
 
 };

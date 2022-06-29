@@ -26,6 +26,10 @@ enum sensors_name {NAME_IMU, NAME_GPS, NAME_RC, NAME_WDIRECTION, NAME_WSPEED};
 /////////////////////////////
 
 
+//////  CONTROLLER CONFIG //////
+#define NB_CONTROLLERS 1
+enum controllers_name {NAME_LINEFOLLOW};
+////////////////////////////////
 
 
 ////////  RC CONFIG ////////

@@ -12,6 +12,8 @@ Sailboat::Sailboat() {
 
   m_servo[NAME_RUDDER] = new Servo_Motor(RUDDER_PIN, RUDDER_PWMMIN, RUDDER_PWMMAX, RUDDER_ANGLEMIN, RUDDER_ANGLEMAX);
   m_servo[NAME_SAIL] = new Servo_Motor(SAIL_PIN, SAIL_PWMMIN, SAIL_PWMMAX, SAIL_ANGLEMIN, SAIL_ANGLEMAX);
+
+  m_controllers[NAME_LINEFOLLOW] = new FollowLine();
 };
 
 Sailboat::~Sailboat() {
@@ -28,6 +30,8 @@ void Sailboat::init(Adafruit_PWMServoDriver* servos_pwm){
   for (size_t i = 0; i < NB_SERVOS; i++) {
     m_servo[i]->init(servos_pwm);
   }
+  m_controllers[NAME_LINEFOLLOW]->init(this);
+  m_xbee->init(this);
 }
 
 WindDirection* Sailboat::wd(){return (WindDirection*) m_sensor[NAME_WDIRECTION];};
@@ -55,10 +59,10 @@ void Sailboat::updateServos(){
       m_servo[NAME_RUDDER]->set( rc()->getValue(RUDDER_CHANNEL) );
       break;
     case AUTONOMOUS:
-      if (m_controller->status()){
-        m_controller->updateCmd();
-        m_servo[NAME_SAIL]->set( m_controller->getSailCmd() );
-        m_servo[NAME_RUDDER]->set( m_controller->getRudderCmd() );
+      if (m_current_controller->status()){
+        m_current_controller->updateCmd();
+        m_servo[NAME_SAIL]->set( m_current_controller->getSailCmd() );
+        m_servo[NAME_RUDDER]->set( m_current_controller->getRudderCmd() );
       }
       break;
 
@@ -86,4 +90,11 @@ void Sailboat::updateTrueWindDirection(){
     m_true_wind_dir = -1;
   }
 
+}
+
+
+void Sailboat::attachController(int controller_name){
+  if (m_current_controller){m_current_controller->disableController();}
+  m_current_controller = m_controllers[controller_name];
+  m_current_controller->enableController();
 }

@@ -15,6 +15,8 @@ void FollowLine::setLine(float lat1,float lon1, float lat2,float lon2, float r=6
   m_bx = b.x;
   m_by = b.y;
   m_r = r;
+
+  m_status = 1;
 };
 
 void FollowLine::updateCmd(){

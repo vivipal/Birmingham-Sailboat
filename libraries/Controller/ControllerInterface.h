@@ -28,9 +28,9 @@ class Controller {
 
     float m_rudder_setpoint=0.5; // percentage
     float m_sail_setpoint=0.5; // percentage
+    int m_status=0;
 
   private:
-    int m_status=0;
 
 };
 #endif

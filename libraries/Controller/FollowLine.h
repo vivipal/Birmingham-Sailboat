@@ -23,6 +23,7 @@ class FollowLine: public Controller {
 
   private :
 
+    double m_lat1,m_lon1,m_lat2,m_lon2;
     float m_ax,m_ay,m_bx,m_by, m_r;
     float m_q=1;
 

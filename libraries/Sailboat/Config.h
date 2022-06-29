@@ -17,7 +17,8 @@
 
 
 
-
+#define LAT_REF 52.489471
+#define LON_REF -1.898575
 #define EARTH_RADIUS 6372800 // Earth radius in meter
 
 //////  SENSORS CONFIG //////

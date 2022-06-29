@@ -3,6 +3,7 @@
 
 #include <Sensor.h>
 #include <Config.h>
+#include <tools.h>
 
 #include <SoftwareSerial.h>
 #include <TinyGPS++.h>
@@ -39,7 +40,7 @@ class GPS: public Sensor {
     int getD();
     int getY();
 
-    COORD getXY(double lat_0=52.489471, double lon_0=-1.898575);
+    COORD getXY();
   private:
     SoftwareSerial ss;
     TinyGPSPlus gps;

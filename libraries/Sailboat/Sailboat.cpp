@@ -44,6 +44,8 @@ XBEE* Sailboat::xbee(){return (XBEE*) m_xbee;};
 Servo_Motor* Sailboat::rudderServo(){return (Servo_Motor*) m_servo[NAME_RUDDER];};
 Servo_Motor* Sailboat::sailServo(){return (Servo_Motor*) m_servo[NAME_SAIL];};
 
+FollowLine* Sailboat::getFollowLine(){return (FollowLine*) m_controllers[NAME_LINEFOLLOW];}
+
 void Sailboat::updateSensors(){
   for (size_t i = 0; i < NB_SENSORS; i++) {
     m_sensor[i]->update();
@@ -94,7 +96,5 @@ void Sailboat::updateTrueWindDirection(){
 
 
 void Sailboat::attachController(int controller_name){
-  if (m_current_controller){m_current_controller->disableController();}
   m_current_controller = m_controllers[controller_name];
-  m_current_controller->enableController();
 }

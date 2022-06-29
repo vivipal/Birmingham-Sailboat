@@ -16,6 +16,7 @@
 
 class XBEE;
 class Controller;
+class FollowLine;
 
 
 class Sailboat {
@@ -46,7 +47,7 @@ class Sailboat {
     float getTrueWindDirection(){return m_true_wind_dir;};
 
     void attachController(int controller_name);
-
+    FollowLine* getFollowLine();
 
   private:
 

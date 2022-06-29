@@ -19,9 +19,7 @@ class Controller {
     float getRudderCmd() { return m_rudder_setpoint;}
     float getSailCmd() { return m_sail_setpoint;}
 
-    void enableController(){m_enabled=1;}
-    void disableController(){m_enabled=0;}
-    int status(){return m_enabled;}
+    int status(){return m_status;} // 0 if controller not ready/set
 
 
   protected:
@@ -32,7 +30,7 @@ class Controller {
     float m_sail_setpoint=0.5; // percentage
 
   private:
-    int m_enabled=0;
+    int m_status=0;
 
 };
 #endif

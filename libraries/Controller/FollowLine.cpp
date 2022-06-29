@@ -1,17 +1,21 @@
 #include <FollowLine.h>
 
 
-void FollowLine::setLine(float ax,float ay, float bx,float by, float r=6){
-  m_ax = ax;
-  m_ay = ay;
-  m_bx = bx;
-  m_by = by;
+void FollowLine::setLine(float lat1,float lon1, float lat2,float lon2, float r=6){
+  m_lat1 = lat1;
+  m_lon1 = lon1;
+  m_lat2 = lat2;
+  m_lon2 = lon2;
+
+  COORD a = coord2cart(lat1,lon1);
+  COORD b = coord2cart(lat2,lon2);
+
+  m_ax = a.x;
+  m_ay = a.y;
+  m_bx = b.x;
+  m_by = b.y;
   m_r = r;
 };
-
-float sawtooth(const float x){
-  return 2*atan(tan(x/2));
-}
 
 void FollowLine::updateCmd(){
   COORD m = m_boat->gps()->getXY();

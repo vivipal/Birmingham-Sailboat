@@ -18,9 +18,22 @@ void XBEE::update(){
     unsigned char c = XBEE_SERIAL.read();
     if (c==0x63){enterConfigMode();}
     else if (c==0x69){sendInfo();}
+    else if (c==0x6C){sendInfoLine();}
   }
 }
 
+
+void XBEE::sendInfoLine(){
+  COORD a = m_boat->getFollowLine()->getPointA();
+  COORD b = m_boat->getFollowLine()->getPointB();
+
+  XBEE_SERIAL.print(a.x,8);XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(a.y,8);XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(b.x,8);XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(b.y,8);XBEE_SERIAL.print(";");
+
+  XBEE_SERIAL.print("\n\r");
+}
 
 void XBEE::sendInfo(){
   XBEE_SERIAL.print(m_boat->controlMode());XBEE_SERIAL.print(";"); // control mode of the boat

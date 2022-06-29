@@ -16,9 +16,12 @@ class FollowLine: public Controller {
   public :
     FollowLine(){};
 
-    void setLine(float ax,float ay, float bx,float by, float r=6);
+    void setLine(float lat1,float lon1, float lat2,float lon2, float r=6);
 
     void updateCmd();
+
+    COORD getPointA();
+    COORD getPointB();
 
 
   private :

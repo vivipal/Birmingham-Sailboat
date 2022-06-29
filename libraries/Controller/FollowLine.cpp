@@ -45,3 +45,19 @@ void FollowLine::updateCmd(){
   m_rudder_setpoint = (deltar+DELTARMAX)/(2*DELTARMAX);
   m_sail_setpoint = (deltasmax)/(ANGLE_SAILMAX*M_PI/180);
 };
+
+
+
+COORD FollowLine::getPointA(){
+  COORD c;
+  c.x = m_lat1;
+  c.y = m_lon1;
+  return c;
+}
+
+COORD FollowLine::getPointB(){
+  COORD c;
+  c.x = m_lat2;
+  c.y = m_lon2;
+  return c;
+}

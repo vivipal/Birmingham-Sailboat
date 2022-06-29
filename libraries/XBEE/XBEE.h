@@ -20,6 +20,7 @@ class XBEE {
     void update();
 
     void sendInfo();
+    void sendInfoLine();
     void enterConfigMode();
 
   private:

@@ -1,5 +1,4 @@
 #include "WindDirection.h"
-#include <Arduino.h>
 
 WindDirection::WindDirection(){}
 

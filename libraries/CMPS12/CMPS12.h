@@ -5,7 +5,7 @@
 #include <Config.h>
 
 #include <SoftwareSerial.h>
-#include <Arduino.h>
+#include <math.h>
 
 
 class CMPS12: public Sensor {

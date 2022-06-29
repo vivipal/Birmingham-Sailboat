@@ -5,7 +5,6 @@
 #include <Config.h>
 
 #include <SoftwareSerial.h>
-#include <Arduino.h>
 #include <TinyGPS++.h>
 
 #define VALID 1

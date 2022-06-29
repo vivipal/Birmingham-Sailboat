@@ -1,6 +1,5 @@
 #include "RCReceiver.h"
 
-#include <Arduino.h>
 
 
 RC::RC(){

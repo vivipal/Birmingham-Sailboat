@@ -2,7 +2,6 @@
 #define __SERVOCONTROLLER_H__
 
 
-#include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
 class Servo_Motor {

@@ -3,6 +3,7 @@
 
 #include <Sensor.h>
 #include <Config.h>
+#include <Arduino.h> // millis() & micros() & digitalRead()
 
 class RC: public Sensor{
   public :

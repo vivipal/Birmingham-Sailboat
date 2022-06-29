@@ -1,5 +1,4 @@
 #include "WindSpeed.h"
-#include <Arduino.h>
 
 
 WindSpeed::WindSpeed(){}

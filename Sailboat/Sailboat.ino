@@ -1,9 +1,10 @@
 #include <Sailboat.h>
+#include <XBEE.h>
 
 Sailboat boat;
 
 Logger logger;
-
+XBEE xbee;
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
@@ -23,6 +24,7 @@ void setup(){
   pinMode(SAIL_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(SAIL_CHANNEL_PIN), intCH2, CHANGE);
 
   logger.init(&boat); logger.open();
+  xbee.init(&boat);
 
   boat.attachController(NAME_LINEFOLLOW);
   boat.getFollowLine()->setLine(52.485974,-1.889489,52.486062,-1.887799);
@@ -37,4 +39,5 @@ void loop(){
   boat.updateSensors();
   boat.updateServos();
   logger.newLog();
+  xbee.update();
 }

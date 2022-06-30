@@ -11,10 +11,8 @@
 #include <ServoController.h>
 #include <RCReceiver.h>
 #include <Logger.h>
-#include <XBEE.h>
 #include <FollowLine.h>
 
-class XBEE;
 class Controller;
 class FollowLine;
 
@@ -33,7 +31,6 @@ class Sailboat {
     CMPS12* compass();
     GPS* gps();
     RC* rc();
-    XBEE* xbee();
 
     Servo_Motor* rudderServo();
     Servo_Motor* sailServo();
@@ -52,7 +49,6 @@ class Sailboat {
   private:
 
     Sensor* m_sensor[NB_SENSORS];
-    XBEE* m_xbee;
     Servo_Motor* m_servo[NB_SERVOS];
 
     float m_true_wind_dir=0;

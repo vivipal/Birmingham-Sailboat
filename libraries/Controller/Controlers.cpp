@@ -1,4 +1,4 @@
-#include <FollowLine.h>
+#include <Controllers.h>
 
 
 void FollowLine::setLine(float lat1,float lon1, float lat2,float lon2, float r=6){
@@ -18,6 +18,11 @@ void FollowLine::setLine(float lat1,float lon1, float lat2,float lon2, float r=6
 
   m_status = 1;
 };
+
+void FollowLine::setLine(COORD a, COORD b, float r=6){
+  setLine(a.x,a.y,b.x,b.y,r);
+}
+
 
 void FollowLine::updateCmd(){
   COORD m = m_boat->gps()->getXY();
@@ -62,4 +67,13 @@ COORD FollowLine::getPointB(){
   c.x = m_lat2;
   c.y = m_lon2;
   return c;
+}
+
+NoneController::NoneController(){
+  m_status=1;
+}
+
+void NoneController::updateCmd(){
+  m_rudder_setpoint = 0.5;
+  m_sail_setpoint = 1;
 }

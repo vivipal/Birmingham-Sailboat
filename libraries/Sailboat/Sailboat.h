@@ -11,10 +11,11 @@
 #include <ServoController.h>
 #include <RCReceiver.h>
 #include <Logger.h>
-#include <FollowLine.h>
+#include <Controllers.h>
 
 class Controller;
 class FollowLine;
+class NoneController;
 
 
 class Sailboat {

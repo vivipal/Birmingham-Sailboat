@@ -26,8 +26,7 @@ void setup(){
   logger.init(&boat); logger.open();
   xbee.init(&boat);
 
-  boat.attachController(NAME_LINEFOLLOW);
-  boat.getFollowLine()->setLine(52.485974,-1.889489,52.486062,-1.887799);
+  boat.attachController(NAME_NONECONTROLLER);
 
   Serial.println("Setup done"); Serial.println("----------\n");
   XBEE_SERIAL.println("Setup done\n\r----------\n");

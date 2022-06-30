@@ -13,6 +13,7 @@ Sailboat::Sailboat() {
   m_servo[NAME_SAIL] = new Servo_Motor(SAIL_PIN, SAIL_PWMMIN, SAIL_PWMMAX, SAIL_ANGLEMIN, SAIL_ANGLEMAX);
 
   m_controllers[NAME_LINEFOLLOW] = new FollowLine();
+  m_controllers[NAME_NONECONTROLLER] = new NoneController();
 };
 
 Sailboat::~Sailboat() {

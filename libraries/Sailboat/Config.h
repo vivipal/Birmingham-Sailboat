@@ -87,6 +87,7 @@ enum control_mode {RADIO_CONTROLLED, AUTONOMOUS};
 struct COORD {
   double x = 0;
   double y = 0;
+  int isDefined(){return (x&&y);}
 };
 /////////////////////////////
 

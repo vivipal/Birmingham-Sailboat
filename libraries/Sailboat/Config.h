@@ -84,10 +84,15 @@ enum control_mode {RADIO_CONTROLLED, AUTONOMOUS};
 #define GPS_PIN_TX 13
 #define GPS_BAUDRATE 9600
 
-struct COORD {
+struct COORD_XY {
   double x = 0;
   double y = 0;
   int isDefined(){return (x&&y);}
+};
+struct COORD_LATLON {
+  double lat = 0;
+  double lon = 0;
+  int isDefined(){return (lat&&lon);}
 };
 /////////////////////////////
 

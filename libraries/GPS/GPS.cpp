@@ -56,12 +56,15 @@ int GPS::elevationStatus(){
   return gps.altitude.isValid() ? VALID : NOT_VALID;
 }
 
-COORD GPS::getXY(){
+COORD_LATLON GPS::getLatLon(){
+  COORD_LATLON c;
+  c.lat = gps.location.lat();
+  c.lon = gps.location.lng();
+  return c;
+}
 
-  double lat = gps.location.lat();
-  double lon = gps.location.lng();
-
-  COORD c;
-  c = coord2cart(lat,lon);
+COORD_XY GPS::getXY(){
+  COORD_XY c;
+  c = coord2cart(getLatLon());
   return c;
 }

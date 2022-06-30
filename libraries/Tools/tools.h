@@ -8,9 +8,9 @@
 float sawtooth(const float x);
 
 
-COORD coord2cart(double lat, double lon);
+COORD_XY coord2cart(double lat, double lon);
 
-COORD coord2cart(COORD latlon);
+COORD_XY coord2cart(COORD_LATLON latlon);
 
 
 #endif

@@ -15,12 +15,12 @@ class FollowLine: public Controller {
     FollowLine(){};
 
     void setLine(float lat1,float lon1, float lat2,float lon2, float r=6);
-    void setLine(COORD a, COORD b, float r=6);
+    void setLine(COORD_LATLON a, COORD_LATLON b, float r=6);
 
     void updateCmd();
 
-    COORD getPointA();
-    COORD getPointB();
+    COORD_LATLON getPointA();
+    COORD_LATLON getPointB();
 
   private :
     double m_lat1,m_lon1,m_lat2,m_lon2;

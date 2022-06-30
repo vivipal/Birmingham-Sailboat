@@ -24,13 +24,13 @@ void XBEE::update(){
 
 
 void XBEE::sendInfoLine(){
-  COORD a = m_boat->getFollowLine()->getPointA();
-  COORD b = m_boat->getFollowLine()->getPointB();
+  COORD_LATLON a = m_boat->getFollowLine()->getPointA();
+  COORD_LATLON b = m_boat->getFollowLine()->getPointB();
 
-  XBEE_SERIAL.print(a.x,8);XBEE_SERIAL.print(";");
-  XBEE_SERIAL.print(a.y,8);XBEE_SERIAL.print(";");
-  XBEE_SERIAL.print(b.x,8);XBEE_SERIAL.print(";");
-  XBEE_SERIAL.print(b.y,8);XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(a.lat,8);XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(a.lon,8);XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(b.lat,8);XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(b.lon,8);XBEE_SERIAL.print(";");
 
   XBEE_SERIAL.print("\n\r");
 }

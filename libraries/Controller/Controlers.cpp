@@ -7,8 +7,8 @@ void FollowLine::setLine(float lat1,float lon1, float lat2,float lon2, float r=6
   m_lat2 = lat2;
   m_lon2 = lon2;
 
-  COORD a = coord2cart(lat1,lon1);
-  COORD b = coord2cart(lat2,lon2);
+  COORD_XY a = coord2cart(lat1,lon1);
+  COORD_XY b = coord2cart(lat2,lon2);
 
   m_ax = a.x;
   m_ay = a.y;
@@ -19,13 +19,13 @@ void FollowLine::setLine(float lat1,float lon1, float lat2,float lon2, float r=6
   m_status = 1;
 };
 
-void FollowLine::setLine(COORD a, COORD b, float r=6){
-  setLine(a.x,a.y,b.x,b.y,r);
+void FollowLine::setLine(COORD_LATLON a, COORD_LATLON b, float r=6){
+  setLine(a.lat,a.lon,b.lat,b.lon,r);
 }
 
 
 void FollowLine::updateCmd(){
-  COORD m = m_boat->gps()->getXY();
+  COORD_XY m = m_boat->gps()->getXY();
 
   float x = m.x;
   float y = m.y;
@@ -55,17 +55,17 @@ void FollowLine::updateCmd(){
 
 
 
-COORD FollowLine::getPointA(){
-  COORD c;
-  c.x = m_lat1;
-  c.y = m_lon1;
+COORD_LATLON FollowLine::getPointA(){
+  COORD_LATLON c;
+  c.lat = m_lat1;
+  c.lon = m_lon1;
   return c;
 }
 
-COORD FollowLine::getPointB(){
-  COORD c;
-  c.x = m_lat2;
-  c.y = m_lon2;
+COORD_LATLON FollowLine::getPointB(){
+  COORD_LATLON c;
+  c.lat = m_lat2;
+  c.lon = m_lon2;
   return c;
 }
 

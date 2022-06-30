@@ -40,7 +40,8 @@ class GPS: public Sensor {
     int getD();
     int getY();
 
-    COORD getXY();
+    COORD_LATLON getLatLon();
+    COORD_XY getXY();
   private:
     SoftwareSerial ss;
     TinyGPSPlus gps;

@@ -53,6 +53,8 @@ float readFloat(){
 
 void XBEE::receiveMission(){
 
+  while (XBEE_SERIAL.available()<1);
+
   int nb_wp = XBEE_SERIAL.read();
 
   float lat = 0.0;

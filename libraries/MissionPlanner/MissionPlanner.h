@@ -16,8 +16,17 @@ class MissionPlanner {
     void init(Sailboat* boat);
 
     int nbWP();
+    void setWP(int nb, COORD_LATLON c);
+    void reset();
     void update(COORD_LATLON m);
     int waypoint_passed(COORD_LATLON m);
+    void printWPs(){
+      for (size_t i = 0; i < MAX_WAYPOINTS+1; i++) {
+        Serial.print(m_wp[i].lat,6);
+        Serial.print(" ");
+        Serial.println(m_wp[i].lon,6);
+      }
+    }
 
 
   private:

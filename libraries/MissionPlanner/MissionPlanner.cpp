@@ -39,6 +39,26 @@ int MissionPlanner::nbWP(){
   return c-1;
 }
 
+void MissionPlanner::setWP(int nb, COORD_LATLON c){
+  m_wp[nb] = c;
+  m_nb_wp = nbWP();
+}
+
+void MissionPlanner::reset(){
+  /*
+    Remove all waypoints and set current position as home
+  */
+  COORD_LATLON tmp;
+  tmp.lat = 0.0;
+  tmp.lon = 0.0;
+  for (size_t i = 1; i < MAX_WAYPOINTS+1; i++) {
+    m_wp[i] = tmp;
+  }
+  m_wp[0] = m_boat->gps()->getLatLon();
+  m_nb_wp = nbWP();
+
+}
+
 void MissionPlanner::update(COORD_LATLON m){
 
 

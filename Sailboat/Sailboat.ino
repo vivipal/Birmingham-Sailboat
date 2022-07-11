@@ -20,7 +20,7 @@ void setup(){
   Serial.begin(57600);
   Serial.println("Serial initialized");
 
-  boat.init(&pwm);
+  boat.init(&pwm, &MPlanner);
   Serial.println("Boat initialized");
 
 

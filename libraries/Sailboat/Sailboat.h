@@ -12,11 +12,11 @@
 #include <RCReceiver.h>
 #include <Logger.h>
 #include <Controllers.h>
+#include <MissionPlanner.h>
 
 class Controller;
 class FollowLine;
-class NoneController;
-
+class MissionPlanner;
 
 class Sailboat {
 
@@ -25,7 +25,7 @@ class Sailboat {
 
     ~Sailboat();
 
-    void init(Adafruit_PWMServoDriver* servos_pwm);
+    void init(Adafruit_PWMServoDriver* servos_pwm, MissionPlanner* mp);
 
     WindDirection* wd();
     WindSpeed* ws();
@@ -47,6 +47,8 @@ class Sailboat {
     void attachController(int controller_name);
     FollowLine* getFollowLine();
 
+    MissionPlanner* getMP(){return m_missionplanner;}
+
   private:
 
     Sensor* m_sensor[NB_SENSORS];
@@ -56,6 +58,8 @@ class Sailboat {
 
     Controller* m_controllers[NB_CONTROLLERS];
     Controller* m_current_controller = NULL;
+
+    MissionPlanner* m_missionplanner = NULL;
 
 
 };

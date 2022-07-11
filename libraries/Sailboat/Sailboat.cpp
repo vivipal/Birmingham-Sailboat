@@ -22,7 +22,7 @@ Sailboat::~Sailboat() {
   }
 }
 
-void Sailboat::init(Adafruit_PWMServoDriver* servos_pwm){
+void Sailboat::init(Adafruit_PWMServoDriver* servos_pwm, MissionPlanner* mp){
   for (size_t i = 0; i < NB_SENSORS; i++) {
     m_sensor[i]->init();
   }
@@ -31,6 +31,7 @@ void Sailboat::init(Adafruit_PWMServoDriver* servos_pwm){
     m_servo[i]->init(servos_pwm);
   }
   m_controllers[NAME_LINEFOLLOW]->init(this);
+  m_missionplanner = mp;
 }
 
 WindDirection* Sailboat::wd(){return (WindDirection*) m_sensor[NAME_WDIRECTION];};

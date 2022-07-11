@@ -58,12 +58,12 @@ void XBEE::receiveMission(){
   float lat = 0.0;
   float lon = 0.0;
 
+  m_boat->getMP()->reset();
+  COORD_LATLON tmp;
   for (size_t i = 0; i < nb_wp; i++) {
-    lat = readFloat();
-    lon = readFloat();
-    Serial.print(lat,6);
-    Serial.print(" ");
-    Serial.println(lon,6);
+    tmp.lat = readFloat();
+    tmp.lon = readFloat();
+    m_boat->getMP()->setWP(i+1,tmp);
   }
 }
 

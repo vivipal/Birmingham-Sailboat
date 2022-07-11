@@ -21,7 +21,7 @@ class XBEE {
 
     void sendInfo();
     void sendInfoLine();
-    void enterConfigMode();
+    void receiveMission();
 
   private:
     unsigned int m_last_receive = 0;

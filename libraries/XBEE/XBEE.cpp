@@ -16,7 +16,7 @@ XBEE::~XBEE(){}
 void XBEE::update(){
   while (XBEE_SERIAL.available()){
     unsigned char c = XBEE_SERIAL.read();
-    if (c==0x63){enterConfigMode();}
+    if (c==0x6D){receiveMission();}
     else if (c==0x69){sendInfo();}
     else if (c==0x6C){sendInfoLine();}
   }
@@ -33,6 +33,38 @@ void XBEE::sendInfoLine(){
   XBEE_SERIAL.print(b.lon,8);XBEE_SERIAL.print(";");
 
   XBEE_SERIAL.print("\n\r");
+}
+
+
+float readFloat(){
+  /*
+    read the 4 incomming bytes and convert them to float
+  */
+  float f=0.0;
+  uint8_t* b = (uint8_t*) &f;
+
+  while (XBEE_SERIAL.available()<4); // waiting for 4 bytes
+
+  for (size_t i = 0; i < sizeof(f); i++) {
+    *(b+i) = (uint8_t)XBEE_SERIAL.read();
+  }
+  return f;
+}
+
+void XBEE::receiveMission(){
+
+  int nb_wp = XBEE_SERIAL.read();
+
+  float lat = 0.0;
+  float lon = 0.0;
+
+  for (size_t i = 0; i < nb_wp; i++) {
+    lat = readFloat();
+    lon = readFloat();
+    Serial.print(lat,6);
+    Serial.print(" ");
+    Serial.println(lon,6);
+  }
 }
 
 void XBEE::sendInfo(){
@@ -54,30 +86,4 @@ void XBEE::sendInfo(){
   XBEE_SERIAL.print(m_boat->rudderServo()->getLastSet());XBEE_SERIAL.print(";");
 
   XBEE_SERIAL.print("\n\r");
-}
-
-
-void XBEE::enterConfigMode(){ // just test for the moment
-  m_config_start = millis();
-  XBEE_SERIAL.println("Enter config mode.");
-  while (1){
-
-    if (XBEE_SERIAL.available()){
-      m_config_start = millis();
-      unsigned char c = XBEE_SERIAL.read();
-      switch (c){
-        case 0x67: // 'g'
-          XBEE_SERIAL.println("G");
-
-          break;
-        case 0x77: // 'w'
-          XBEE_SERIAL.println("W");
-
-          break;
-
-      }
-    }
-    if ((millis()-m_config_start)>5000){break;}
-  }
-  XBEE_SERIAL.println("Exit config mode.");
 }

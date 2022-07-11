@@ -50,6 +50,7 @@ void Sailboat::updateSensors(){
     m_sensor[i]->update();
   }
   updateTrueWindDirection();
+  getMP()->update();
 }
 
 void Sailboat::updateServos(){

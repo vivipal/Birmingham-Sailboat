@@ -59,6 +59,10 @@ void MissionPlanner::reset(){
 
 }
 
+void MissionPlanner::update(){
+  update(m_boat->gps()->getLatLon());
+}
+
 void MissionPlanner::update(COORD_LATLON m){
 
 

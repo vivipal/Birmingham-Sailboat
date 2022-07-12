@@ -56,6 +56,7 @@ void MissionPlanner::reset(){
   }
   m_wp[0] = m_boat->gps()->getLatLon();
   m_nb_wp = nbWP();
+  m_nb_wp_passed = 0;
 
 }
 
@@ -66,7 +67,7 @@ void MissionPlanner::update(){
 void MissionPlanner::update(COORD_LATLON m){
 
 
-  if (waypoint_passed(m)){
+  if (waypoint_passed(m) && (m_nb_wp>0)){
     m_nb_wp_passed++;
     // XBEE_SERIAL.print("WP reached, going to ");
     // XBEE_SERIAL.println(m_nb_wp_passed);

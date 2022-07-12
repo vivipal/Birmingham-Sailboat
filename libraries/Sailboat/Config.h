@@ -59,14 +59,15 @@ enum channel_name {RUDDER_CHANNEL,SAIL_CHANNEL};
 enum servos_name {NAME_RUDDER, NAME_SAIL};
 
 #define RUDDER_PIN 0
-#define RUDDER_PWMMIN 143
-#define RUDDER_PWMMAX 428
-#define RUDDER_ANGLEMIN -90
-#define RUDDER_ANGLEMAX 90
+#define RUDDER_PWMMIN 220
+#define RUDDER_PWMMAX 420
+#define RUDDER_ANGLEMIN -45
+#define RUDDER_ANGLEMAX 45
+
 
 #define SAIL_PIN 1
-#define SAIL_PWMMIN 151
-#define SAIL_PWMMAX 417
+#define SAIL_PWMMIN 340
+#define SAIL_PWMMAX 460
 #define SAIL_ANGLEMIN 0
 #define SAIL_ANGLEMAX 6*360
 /////////////////////////////

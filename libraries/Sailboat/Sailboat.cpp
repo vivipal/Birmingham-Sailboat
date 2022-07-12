@@ -70,6 +70,24 @@ void Sailboat::updateServos(){
   }
 }
 
+void Sailboat::testServos(){
+  delay(2000);
+  Serial.println("Servos test started.");
+  m_servo[NAME_SAIL]->set( 0 );
+  Serial.println("  Sail to 0");
+  delay(5000);
+  m_servo[NAME_RUDDER]->set( 0 );
+  Serial.println("  Rudder to 0");
+  delay(5000);
+  m_servo[NAME_SAIL]->set( 1 );
+  Serial.println("  Sail to 1");
+  delay(5000);
+  m_servo[NAME_RUDDER]->set( 1 );
+  Serial.println("  Rudder to 1");
+  delay(5000);
+  Serial.println("Servos test finished.");
+}
+
 int Sailboat::controlMode(){return rc()->isReceiving() ? RADIO_CONTROLLED : AUTONOMOUS;}
 
 

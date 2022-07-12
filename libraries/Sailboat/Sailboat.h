@@ -39,6 +39,7 @@ class Sailboat {
     void updateSensors();
 
     void updateServos();
+    void testServos();
     int controlMode();
 
     void updateTrueWindDirection();

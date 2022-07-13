@@ -46,6 +46,7 @@ void MissionPlanner::start(){
     COORD_LATLON a = m_wp[0];
     COORD_LATLON b = m_wp[1];
     m_boat->getFollowLine()->setLine(a,b);
+    m_boat->attachController(NAME_LINEFOLLOW);
   }
 }
 

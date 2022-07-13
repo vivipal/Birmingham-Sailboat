@@ -45,11 +45,11 @@ enum channel_name {RUDDER_CHANNEL,SAIL_CHANNEL};
 /////////////////////////////
 
 
-////////  RC CONFIG ////////
+////////  XBEE CONFIG ////////
 #define XBEE_SERIAL Serial2
 #define XBEE_BAUDRATE 9600
 #define XBEE_PERIOD 10
-/////////////////////////////
+///////////////////////////////
 
 
 

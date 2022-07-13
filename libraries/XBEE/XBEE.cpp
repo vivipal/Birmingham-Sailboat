@@ -19,6 +19,7 @@ void XBEE::update(){
     if (c==0x6D){receiveMission();}
     else if (c==0x69){sendInfo();}
     else if (c==0x6C){sendInfoLine();}
+    else if (c==0x63){controlMode();}
   }
 }
 
@@ -88,4 +89,35 @@ void XBEE::sendInfo(){
   XBEE_SERIAL.print(m_boat->rudderServo()->getLastSet());XBEE_SERIAL.print(";");
 
   XBEE_SERIAL.print("\n\r");
+}
+
+
+void XBEE::controlMode(){
+
+  char c = 'a'; // useless caracter
+  float rudder_setpoint  = m_boat->rudderServo()->getLastSet();
+  float sail_setpoint = m_boat->sailServo()->getLastSet();
+  while(c!=0x71) {
+    while(!XBEE_SERIAL.available());
+    c = XBEE_SERIAL.read();
+    switch (c) {
+      case 0x68:
+        m_boat->rudderServo()->set(rudder_setpoint+=0.05);
+        XBEE_SERIAL.print("rudder: ");XBEE_SERIAL.print(rudder_setpoint);XBEE_SERIAL.print(" | sail: ");XBEE_SERIAL.println(sail_setpoint);
+        break;
+      case 0x6A:
+        m_boat->sailServo()->set(sail_setpoint-=0.05);
+        XBEE_SERIAL.print("rudder: ");XBEE_SERIAL.print(rudder_setpoint);XBEE_SERIAL.print(" | sail: ");XBEE_SERIAL.println(sail_setpoint);
+        break;
+      case 0x6B:
+        m_boat->sailServo()->set(sail_setpoint+=0.05);
+        XBEE_SERIAL.print("rudder: ");XBEE_SERIAL.print(rudder_setpoint);XBEE_SERIAL.print(" | sail: ");XBEE_SERIAL.println(sail_setpoint);
+        break;
+      case 0x6C:
+        m_boat->rudderServo()->set(rudder_setpoint-=0.05);
+        XBEE_SERIAL.print("rudder: ");XBEE_SERIAL.print(rudder_setpoint);XBEE_SERIAL.print(" | sail: ");XBEE_SERIAL.println(sail_setpoint);
+        break;
+    }
+  }
+
 }

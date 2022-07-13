@@ -23,8 +23,8 @@ class FollowLine: public Controller {
     COORD_LATLON getPointB();
 
   private :
-    double m_lat1,m_lon1,m_lat2,m_lon2;
-    float m_ax,m_ay,m_bx,m_by, m_r;
+    double m_lat1=0.0,m_lon1=0.0,m_lat2=0.0,m_lon2=0.0;
+    float m_ax=0.0,m_ay=0.0,m_bx=0.0,m_by=0.0, m_r=6;
     float m_q=1;
 };
 

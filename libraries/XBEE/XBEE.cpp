@@ -68,6 +68,7 @@ void XBEE::receiveMission(){
     tmp.lon = readFloat();
     m_boat->getMP()->setWP(i+1,tmp);
   }
+  m_boat->getMP()->start();
 }
 
 void XBEE::sendInfo(){

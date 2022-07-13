@@ -9,25 +9,6 @@ void MissionPlanner::init(Sailboat* boat){
   m_boat = boat;
   m_wp[0] = m_boat->gps()->getLatLon();
 
-  // Test Mission
-  COORD_LATLON tmp;
-  tmp.lat =52.48595428857752;
-  tmp.lon =-1.8897095942135334;
-  m_wp[1] = tmp;
-
-  tmp.lat =52.48549204855041;
-  tmp.lon =-1.8892482542629718;
-  m_wp[2] = tmp;
-
-  tmp.lat =52.48448043978321;
-  tmp.lon =-1.8906108164425373;
-  m_wp[3] = tmp;
-
-  tmp.lat =52.48421963906883;
-  tmp.lon =-1.8918017172451496;
-  m_wp[4] = tmp;
-
-
   m_nb_wp = nbWP();
 
 }
@@ -58,6 +39,14 @@ void MissionPlanner::reset(){
   m_nb_wp = nbWP();
   m_nb_wp_passed = 0;
 
+}
+
+void MissionPlanner::start(){
+  if (m_nb_wp > 1){
+    COORD_LATLON a = m_wp[0];
+    COORD_LATLON b = m_wp[1];
+    m_boat->getFollowLine()->setLine(a,b);
+  }
 }
 
 void MissionPlanner::update(){

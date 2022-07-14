@@ -58,8 +58,8 @@ int GPS::elevationStatus(){
 
 COORD_LATLON GPS::getLatLon(){
   COORD_LATLON c;
-  c.lat = gps.location.lat();
-  c.lon = gps.location.lng();
+  c.lat = getLat();
+  c.lon = getLon();
   return c;
 }
 

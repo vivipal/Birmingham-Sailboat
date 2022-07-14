@@ -62,6 +62,8 @@ void Sailboat::updateServos(){
     case AUTONOMOUS:
       if (m_current_controller->status()){
         m_current_controller->updateCmd();
+        // Serial.print("m_current_controller->getSailCmd() ");Serial.println(m_current_controller->getSailCmd());
+        // Serial.print("m_current_controller->getRudderCmd() ");Serial.println(m_current_controller->getRudderCmd());
         m_servo[NAME_SAIL]->set( m_current_controller->getSailCmd() );
         m_servo[NAME_RUDDER]->set( m_current_controller->getRudderCmd() );
       }
@@ -93,21 +95,16 @@ int Sailboat::controlMode(){return rc()->isReceiving() ? RADIO_CONTROLLED : AUTO
 
 void Sailboat::updateTrueWindDirection(){
 
-  if (gps()->speedStatus() && gps()->courseStatus()){
+  float SOG = gps()->speedStatus() ? gps()->getSpeed() : 0;
+  float COG = gps()->courseStatus() ? gps()->getCourse()*180/M_PI : compass()->getAngle();
 
-    float SOG = gps()->getSpeed();
-    float COG = gps()->getCourse()*180/M_PI;
+  float AWD = ((int)(-1*(wd()->getDirection() + compass()->getAngle())+90)%360)/180*M_PI;
+  float AWS = ws()->getSpeed();
 
-    float AWD = ((int)(wd()->getDirection() + compass()->getAngle())%360)*180/M_PI;
-    float AWS = ws()->getSpeed();
+  float u = SOG*sin(COG) - AWS*sin(AWD);
+  float v = SOG*cos(COG) - AWS*cos(AWD);
 
-    float u = SOG*sin(COG) - AWS*sin(AWD);
-    float v = SOG*cos(COG) - AWS*cos(AWD);
-
-    m_true_wind_dir = atan2(u,v);
-  } else {
-    m_true_wind_dir = -1;
-  }
+  m_true_wind_dir = atan2(u,v);
 
 }
 

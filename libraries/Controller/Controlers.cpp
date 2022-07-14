@@ -30,7 +30,7 @@ void FollowLine::updateCmd(){
   float x = m.x;
   float y = m.y;
 
-  float theta = m_boat->compass()->getAngle();
+  float theta = ((int)(-1*m_boat->compass()->getAngle()+90)%360)*M_PI/180;
   float psi = m_boat->getTrueWindDirection();
 
   float dx = m_bx-m_ax;
@@ -49,7 +49,7 @@ void FollowLine::updateCmd(){
   float deltar = DELTARMAX / M_PI * sawtooth(theta-theta_bar);
   float deltasmax = M_PI/2 * pow((cos(psi-theta_bar)+1)/2,log(M_PI/2/BETA)/log(2));
 
-  m_rudder_setpoint = (deltar+DELTARMAX)/(2*DELTARMAX);
+  m_rudder_setpoint = 1-(deltar+DELTARMAX)/(2*DELTARMAX);
   m_sail_setpoint = (deltasmax)/(ANGLE_SAILMAX*M_PI/180);
 };
 

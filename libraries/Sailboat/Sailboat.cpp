@@ -98,7 +98,7 @@ void Sailboat::updateTrueWindDirection(){
   float SOG = gps()->speedStatus() ? gps()->getSpeed() : 0;
   float COG = gps()->courseStatus() ? gps()->getCourse()*180/M_PI : compass()->getAngle();
 
-  float AWD = ((int)(-1*(wd()->getDirection() + compass()->getAngle())+90)%360)/180*M_PI;
+  float AWD = (float)((((int)(-1*(wd()->getDirection() + compass()->getAngle())+90)+360)%360))/180*M_PI;
   float AWS = ws()->getSpeed();
 
   float u = SOG*sin(COG) - AWS*sin(AWD);

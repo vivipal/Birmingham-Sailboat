@@ -15,8 +15,8 @@ class Logger {
     Logger();
     ~Logger();
     void init(Sailboat *boat);
-    void open();
-    void close();
+    String open();
+    unsigned long int close();
     void flush(){m_file.flush();};
 
     void write(String msg);
@@ -28,6 +28,8 @@ class Logger {
     String generateFilename();
 
     void newLog();
+
+    int isOpenned(){return m_file!=NULL;};
 
 
   private:

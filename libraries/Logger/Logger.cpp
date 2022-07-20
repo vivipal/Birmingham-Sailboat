@@ -19,15 +19,18 @@ void Logger::init(Sailboat *boat){
   m_nb_entry = 0;
 }
 
-void Logger::open(){
+String Logger::open(){
   m_filename = generateFilename();
   m_file = SD.open(m_filename, FILE_WRITE);
+  m_nb_entry=0;
+  return m_filename;
 }
 
-void Logger::close(){
+unsigned long int Logger::close(){
   m_file.flush();
   m_file.close();
   m_filename = "";
+  return m_nb_entry;
 }
 
 void Logger::write(String msg){

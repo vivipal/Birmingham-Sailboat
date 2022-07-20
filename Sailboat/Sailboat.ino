@@ -29,11 +29,10 @@ void setup(){
   pinMode(SAIL_CHANNEL_PIN, INPUT); attachInterrupt(digitalPinToInterrupt(SAIL_CHANNEL_PIN), intCH2, CHANGE);
   Serial.println("Servos initialized");
 
-  logger.init(&boat); logger.open();
+  logger.init(&boat);// logger.open();
   Serial.println("Logger initialized");
-  xbee.init(&boat);
+  xbee.init(&boat,&logger);
   Serial.println("XBEE initialized");
-  while (boat.gps()->locationStatus()==NOT_VALID);
   MPlanner.init(&boat);
   Serial.println("mp initialized");
 

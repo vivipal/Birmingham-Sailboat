@@ -31,27 +31,27 @@ void Logger::close(){
 }
 
 void Logger::write(String msg){
-  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(msg);}
+  if (ENABLE_LOGGING && m_file!=NULL && (m_time-m_last_log)>LOG_PERIOD){m_file.print(msg);}
   if (ENABLE_SERIAL){Serial.print(msg); }
   if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){XBEE_SERIAL.print(msg);}
 }
 void Logger::write(int val){
-  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val);}
+  if (ENABLE_LOGGING && m_file!=NULL && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val);}
   if (ENABLE_SERIAL){Serial.print(val); }
   if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){XBEE_SERIAL.print(val);}
 }
 void Logger::write(unsigned long int val){
-  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val);}
+  if (ENABLE_LOGGING && m_file!=NULL && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val);}
   if (ENABLE_SERIAL){Serial.print(val); }
   if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){XBEE_SERIAL.print(val);}
 }
 void Logger::write(float val){
-  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val,5);}
+  if (ENABLE_LOGGING && m_file!=NULL && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val,5);}
   if (ENABLE_SERIAL){Serial.print(val,5); }
   if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){XBEE_SERIAL.print(val,5);}
 }
 void Logger::write(double val){
-  if (ENABLE_LOGGING && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val,8);}
+  if (ENABLE_LOGGING && m_file!=NULL && (m_time-m_last_log)>LOG_PERIOD){m_file.print(val,8);}
   if (ENABLE_SERIAL){Serial.print(val,8); }
   if (ENABLE_XBEE && (m_time-m_last_xbee)>XBEE_PERIOD){XBEE_SERIAL.print(val,8);}
 }
@@ -101,9 +101,9 @@ void Logger::newLog(){
     write(m_boat->rudderServo()->getLastSet());write(";");
 
     write("\n\r");
-    m_nb_entry++;
 
-    if ((millis()-m_last_log)>LOG_PERIOD){m_last_log=millis();}
+
+    if ((millis()-m_last_log)>LOG_PERIOD && ENABLE_LOGGING && m_file!=NULL){m_nb_entry++;m_last_log=millis();}
     if ((millis()-m_last_xbee)>XBEE_PERIOD){m_last_xbee=millis();}
 
   }

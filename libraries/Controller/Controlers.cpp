@@ -31,7 +31,7 @@ void FollowLine::updateCmd(){
   float y = m.y;
 
   float theta = (float)((int)(-1*m_boat->compass()->getAngle()+90+360)%360)*M_PI/180;
-  float psi = m_boat->getTrueWindDirection();
+  float psi = (float)((int)(-1*m_boat->getTrueWindDirection()+90+360)%360)*M_PI/180;
 
   float dx = m_bx-m_ax;
   float dy = m_by-m_ay;

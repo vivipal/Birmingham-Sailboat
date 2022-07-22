@@ -96,15 +96,15 @@ int Sailboat::controlMode(){return rc()->isReceiving() ? RADIO_CONTROLLED : AUTO
 void Sailboat::updateTrueWindDirection(){
 
   float SOG = gps()->speedStatus() ? gps()->getSpeed() : 0;
-  float COG = gps()->courseStatus() ? gps()->getCourse()*180/M_PI : compass()->getAngle();
+  float COG = gps()->courseStatus() ? gps()->getCourse()*180/M_PI : compass()->getAngle()/180*M_PI;
 
-  float AWD = (float)((((int)(-1*(wd()->getDirection() + compass()->getAngle())+90)+360)%360))/180*M_PI;
+  float AWD = ((float)(((int)(wd()->getDirection() + compass()->getAngle()))%360))/180*M_PI;
   float AWS = ws()->getSpeed();
 
-  float u = SOG*sin(COG) - AWS*sin(AWD);
-  float v = SOG*cos(COG) - AWS*cos(AWD);
+  float u = -SOG*sin(COG) + AWS*sin(AWD);
+  float v = -SOG*cos(COG) + AWS*cos(AWD);
 
-  m_true_wind_dir = atan2(u,v);
+  m_true_wind_dir = (float)(((int)((atan2(u,v)+2*M_PI)*180/M_PI))%360);
 
 }
 

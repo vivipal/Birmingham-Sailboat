@@ -2,18 +2,17 @@
 
 
 
-GPS::GPS() : ss(GPS_PIN_RX,GPS_PIN_TX){}
+GPS::GPS(){}
 
 void GPS::init(){
-  ss.begin(GPS_BAUDRATE);
+  GPS_SERIAL.begin(GPS_BAUDRATE);
 }
 
 GPS::~GPS(){}
 
 void GPS::update(){
-  ss.listen();
-  while (ss.available() > 0){
-    gps.encode(ss.read());
+  while (GPS_SERIAL.available() > 0){
+    gps.encode(GPS_SERIAL.read());
   }
 }
 

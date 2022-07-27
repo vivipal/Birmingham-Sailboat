@@ -81,8 +81,7 @@ enum control_mode {RADIO_CONTROLLED, AUTONOMOUS};
 /////////////////////////////
 
 ///////  GPS CONFIG  ///////
-#define GPS_PIN_RX 12
-#define GPS_PIN_TX 13
+#define GPS_SERIAL Serial2
 #define GPS_BAUDRATE 9600
 
 struct COORD_XY {

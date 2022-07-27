@@ -5,7 +5,6 @@
 #include <Config.h>
 #include <tools.h>
 
-#include <SoftwareSerial.h>
 #include <TinyGPS++.h>
 
 #define VALID 1
@@ -43,7 +42,6 @@ class GPS: public Sensor {
     COORD_LATLON getLatLon();
     COORD_XY getXY();
   private:
-    SoftwareSerial ss;
     TinyGPSPlus gps;
 };
 

@@ -92,6 +92,8 @@ void XBEE::sendInfo(){
   XBEE_SERIAL.print(m_boat->sailServo()->getLastSet());XBEE_SERIAL.print(";");
   XBEE_SERIAL.print(m_boat->rudderServo()->getLastSet());XBEE_SERIAL.print(";");
 
+  XBEE_SERIAL.print(m_boat->getTrueWindDirection());XBEE_SERIAL.print(";");
+  XBEE_SERIAL.print(m_boat->getMP()->nb_wp_passed());XBEE_SERIAL.print(";");
   XBEE_SERIAL.print("\n\r");
 }
 

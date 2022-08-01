@@ -23,6 +23,7 @@ String Logger::open(){
   m_filename = generateFilename();
   m_file = SD.open(m_filename, FILE_WRITE);
   m_nb_entry=0;
+  m_last_log = millis();
   return m_filename;
 }
 
@@ -105,7 +106,7 @@ void Logger::newLog(){
 
     write("\n\r");
 
-
+    // Serial.println((millis()-m_last_log));
     if ((millis()-m_last_log)>LOG_PERIOD && ENABLE_LOGGING && m_file!=NULL){m_nb_entry++;m_last_log=millis();}
     if ((millis()-m_last_xbee)>XBEE_PERIOD){m_last_xbee=millis();}
 

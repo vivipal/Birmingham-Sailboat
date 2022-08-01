@@ -19,6 +19,7 @@ class MissionPlanner {
     void setWP(int nb, COORD_LATLON c);
     void reset();
     void start();
+    int nb_wp_passed(){return m_nb_wp_passed;}
     void update();
     void update(COORD_LATLON m);
     int waypoint_passed(COORD_LATLON m);

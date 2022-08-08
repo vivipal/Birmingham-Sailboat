@@ -26,10 +26,8 @@ void RC::interruptCH(int pin, int channel){
     float alpha = 0.95;
     unsigned long received_filtered = alpha*m_filtered_value[channel] + (1-alpha)*received_pwm;
 
-    if ((m_offsetmin[channel]<received_pwm && received_pwm<m_offsetmax[channel]) && (abs((int)received_pwm-(int)m_raw_value[channel])< 200||m_raw_value[channel]==0)){
-      m_raw_value[channel] = received_pwm;
-      m_filtered_value[channel] = received_filtered;
-    }
+    m_raw_value[channel] = received_pwm;
+    m_filtered_value[channel] = received_filtered;
   }
 }
 

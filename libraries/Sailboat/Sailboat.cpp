@@ -51,19 +51,20 @@ void Sailboat::updateSensors(){
   }
   updateTrueWindDirection();
   getMP()->update();
+
+  while(rc()->isReceiving()){
+    m_servo[NAME_SAIL]->set( rc()->getValue(SAIL_CHANNEL) );
+    m_servo[NAME_RUDDER]->set( rc()->getValue(RUDDER_CHANNEL) );
+  }
 }
 
 void Sailboat::updateServos(){
   switch (controlMode()){
     case RADIO_CONTROLLED:
-      m_servo[NAME_SAIL]->set( rc()->getValue(SAIL_CHANNEL) );
-      m_servo[NAME_RUDDER]->set( rc()->getValue(RUDDER_CHANNEL) );
       break;
     case AUTONOMOUS:
       if (m_current_controller->status()){
         m_current_controller->updateCmd();
-        // Serial.print("m_current_controller->getSailCmd() ");Serial.println(m_current_controller->getSailCmd());
-        // Serial.print("m_current_controller->getRudderCmd() ");Serial.println(m_current_controller->getRudderCmd());
         m_servo[NAME_SAIL]->set( m_current_controller->getSailCmd() );
         m_servo[NAME_RUDDER]->set( m_current_controller->getRudderCmd() );
       }

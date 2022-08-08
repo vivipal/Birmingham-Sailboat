@@ -68,7 +68,7 @@ int main(int argc, char const *argv[]){
 
 
   char *serial_device = (char*)malloc(30);
-  char *mission_file = (char*)malloc(30);
+  char *mission_file = (char*)malloc(100);
   if (argc!=3){
     std::cout << "Please provide serial port and mission file\nexample: ./send_mission.exe /dev/ttyUSB0 mission.txt." << std::endl;
     return 1;

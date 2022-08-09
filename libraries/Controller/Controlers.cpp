@@ -39,7 +39,7 @@ void FollowLine::updateCmd(){
   float N = pow(pow(dx,2) + pow(dy,2),.5);
   float e = dx/N *(y-m_ay)  -  dy/N *(x-m_ax);
   if (abs(e) > m_r){
-    m_q = e*abs(e);
+    m_q = e/abs(e);
   }
   float phi = atan2(dy,dx);
   float theta_bar = phi - atan(e/m_r);

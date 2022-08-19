@@ -42,7 +42,7 @@ void setup(){
   Serial.println("Setup done"); Serial.println("----------\n");
   XBEE_SERIAL.println("Setup done\n\r----------\n");
 
-  boat.testServos();
+  //boat.testServos();
 }
 
 

@@ -7,8 +7,8 @@
 /////  GLOBAL CONFIG /////
 
 
-#define ENABLE_SERIAL 1
-#define ENABLE_LOGGING 0
+#define ENABLE_SERIAL 0
+#define ENABLE_LOGGING 1
 #define ENABLE_XBEE 0
 
 
@@ -17,8 +17,10 @@
 
 
 
-#define LAT_REF 52.489471
-#define LON_REF -1.898575
+// #define LAT_REF 52.489471
+// #define LON_REF -1.898575
+#define LAT_REF 52.429146
+#define LON_REF -1.947072
 #define EARTH_RADIUS 6372800 // Earth radius in meter
 
 //////  SENSORS CONFIG //////

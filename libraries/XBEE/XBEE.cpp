@@ -137,14 +137,12 @@ void XBEE::logger(){
   unsigned char c = XBEE_SERIAL.read();
   if (c==0x6F){
     if (!m_logger->isOpenned()){
-      XBEE_SERIAL.print("Openning...\t");
       XBEE_SERIAL.print(m_logger->open());
       XBEE_SERIAL.println(" openned");
     }else{
       XBEE_SERIAL.println("A file is already opened");
     }
   }else if (c==0x63){
-    XBEE_SERIAL.println(m_logger->isOpenned());
     XBEE_SERIAL.print(m_logger->close());
     XBEE_SERIAL.println(" entries written.");
   }

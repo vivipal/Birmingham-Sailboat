@@ -91,7 +91,7 @@ void Logger::newLog(){
 
     // data & time ISO8601
     write(m_boat->gps()->getY());write("-");write(m_boat->gps()->getM());write("-");write(m_boat->gps()->getD());
-    write("T");write(m_boat->gps()->geth());write(":");write(m_boat->gps()->getm());write(":");write(m_boat->gps()->gets());
+    write("T");write(m_boat->gps()->geth());write(":");write(m_boat->gps()->getm());write(":");write(m_boat->gps()->gets());write(";");
 
     write(m_boat->wd()->getDirection());write(";"); // direction opf the wind
     write(m_boat->ws()->getSpeed());write(";"); // speed of the wind

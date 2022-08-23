@@ -6,7 +6,8 @@ Every sensor configuration can be found in *libraries/Sailboat/Config.h*
 
 Here is how the wiring is done :
 
-![Wiring Diagram](images/wiring_diagram.svg)
+![Wiring Diagram](images/wiring_diagram.png)
+*A .svg version is also available*
 
 # Requirement
 
